@@ -1,0 +1,18 @@
+.question-manager-container {
+  margin-bottom: 50px; }
+  .question-manager-container .question-manager-filter-row {
+    margin-right: 0px;
+    margin-left: 5px;
+    margin-bottom: 10px; }
+    .question-manager-container .question-manager-filter-row .filter-col {
+      margin-right: 10px;
+      padding: 10px 10px; }
+      .question-manager-container .question-manager-filter-row .filter-col .filter-label {
+        margin-right: 10px;
+        padding-top: 5px; }
+  .question-manager-container .question-count-col {
+    margin-right: 20px; }
+  .question-manager-container .pagination-container {
+    justify-content: flex-end; }
+
+/*# sourceMappingURL=style.css.map */

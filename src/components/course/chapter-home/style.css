@@ -1,0 +1,12 @@
+.chapter-home-container .chapter-heading-row {
+  padding-top: 10px;
+  flex-grow: 1;
+  text-align: center; }
+.chapter-home-container .chapter-resources-row {
+  display: flex; }
+  .chapter-home-container .chapter-resources-row .resource-col {
+    margin: 10px;
+    padding: 10px;
+    border-right: 1px solid; }
+
+/*# sourceMappingURL=style.css.map */

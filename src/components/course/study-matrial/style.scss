@@ -1,0 +1,68 @@
+.study-matrial-container{   
+    .navigation-row{
+        background-color: #4a1e11;         
+        .navigation-col{
+            .study-matrial-list{
+                margin: 0px;
+                list-style: none;
+                .study-matrial-item{
+                    display: inline-block;
+                    margin-right: 15px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    color: rgba(255, 255, 255, 0.85); 
+                    a{
+                        color: rgba(255, 255, 255, 0.85);  
+                        &.active{
+                            background-color: #e84343;
+                            border-radius: 24px;
+                            padding: 5px;
+                           
+                            text-decoration: none;                             
+                        }    
+                    } 
+                                            
+                }
+                
+            }
+
+        }
+    }
+
+    .paper-box{
+        text-align: center;
+        border: 1px solid;
+        border-radius: 10px;
+        padding : 20px;
+        background-color: #6f5b5b;
+        color: #f9f9f9;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    .previous-year-paper-container{
+        
+    }
+.book-container{
+    .book-box{
+        cursor: pointer;
+       // background-image: url("/static/images/hcverma.jpg");
+    }
+}
+
+.book-summary-container{
+    background: #d6d3d3;
+    color: #818181;
+    .book-image-box{
+        padding: 20px;
+    }
+}
+    
+
+    .hand-written-container{
+
+    }
+    
+    .navigation-row-stick{
+        position: fixed;
+    }
+}

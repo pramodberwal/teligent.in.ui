@@ -1,0 +1,22 @@
+.strategy-manager-container{
+    .heading-row{
+        margin-left: 30px;
+    }
+    .strategy-summary-row{
+        background-color: #8b6666;
+        color: white;
+        text-align: center;
+        .strategy-edit-btn{
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+        .strategy-delete-btn{            
+            margin-right: 5px;
+        }
+    }
+    .strategy-Description{
+        background-color: #f3fff3;
+        font-family: 'Dancing Script', cursive;
+    }
+    
+}

@@ -1,0 +1,22 @@
+@import '../../style-vars.scss';
+.topic-manager-container{
+    margin-bottom: 50px;
+    margin-left: 40px;
+    .topic-manager-table{        
+        .mobile-heading{
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width:$mobile-break-point){
+        .topic-manager-table{
+            .desktop-heading{
+                display: none;
+            }
+            .mobile-heading{
+                display: block;
+            }
+        }
+    }
+
+}

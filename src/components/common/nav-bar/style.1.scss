@@ -1,0 +1,146 @@
+@import '../../style-vars.scss';
+.nav-bar-container{
+    background-color: #F76439;
+    background-image: linear-gradient(54deg,#f55a29 -68%,#ff722e 102%);
+    flex-grow: 1;
+   &.sticky{
+    box-shadow: 0px 4px 7px 0 rgba(22, 21, 21, 0.91);
+    transition: top 0.1s linear;
+   }
+    .left{
+        //  border:1px solid blue;
+      } 
+      .middle{
+        flex-grow: 1;
+        .nav-item{
+            padding: 11px; 
+            .dropdown-container{
+                position: absolute;
+                display: none;
+                margin-top: 5px;
+                background-color: aquamarine;
+                ul{
+                    list-style: none;
+                }
+            }
+        }
+        .nav-item:hover{           
+                .dropdown-container{
+                    display: inline-block;
+                
+            }
+        }
+        .nav-bar-item{
+            font-size: 1.5rem;
+            font-family: "Open Sans",sans-serif;
+            -webkit-tap-highlight-color: rgba(255,255,255,0);
+            text-transform: capitalize;
+            font-size: 14px;
+            color: rgba(255,255,255,0.85);
+            position: relative;
+            padding: inherit;
+            border-radius: 24px;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            box-sizing: border-box;
+        }
+        .active{
+            background-color: #c74e17;
+            border-radius: 24px;
+        }
+    
+      }
+      .right{       
+        margin-right:0px; 
+        .justify-content-flex-end{
+            justify-content: flex-end;
+        }        
+        .my-account-login-container{                
+            .login-btn{
+                padding:0px 10px;
+                cursor: pointer;
+                .login-link{                   
+                        color: white;                        
+                        text-decoration: none;
+                }
+            }
+            .logout-btn{
+                margin-left:5px; 
+                padding-left:2px;
+                .logout-link{
+                    text-decoration: none;
+                    color: white;
+                }
+            }
+            
+        }
+        
+    }
+
+    .mobile-menu-toggler{
+        display: none;
+    }
+    .mobile-menu-top-container{
+        display: none;
+    }
+    
+    @media screen and (max-width:$mobile-break-point) { 
+        .mobile-menu-toggler{
+            display: block;
+        }       
+    .mobile-menu-top-container{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        background-color: black;
+      //  z-index: 1; 
+        display: none;
+        
+        .mobile-menu-items-container{ 
+            background: linear-gradient(to bottom,#e8ecf1 50%,#b4bec7 90%);             
+            opacity: 1;
+           // z-index: 2100; 
+            height: 100%;
+            display: none;
+            .nav-item{
+                   // padding: 11px; 
+                    .dropdown-container{
+                        position: absolute;
+                        display: none;
+                        margin-top: 5px;
+                        background-color: aquamarine;
+                        ul{
+                            list-style: none;
+                        }
+                    }
+                }
+                .nav-item:hover{           
+                        .dropdown-container{
+                            display: inline-block;                        
+                    }
+                
+            .nav-bar-item{
+                color: rgb(56, 141, 30);
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 1.5rem;
+            } 
+        }           
+        }
+    }
+        @media screen and (orientation: landscape) {  
+            .mobile-menu-items-container{
+                border:1px solid red;
+            }          
+        }              
+    }
+
+    @media screen and (min-width:$mobile-break-point) and (max-width:$tablet-break-point){  
+        .middle{
+            flex-grow: 1;
+            margin-left:10px;
+        }
+    }   
+}
+
+    

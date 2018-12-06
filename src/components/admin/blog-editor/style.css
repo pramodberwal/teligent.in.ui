@@ -1,0 +1,14 @@
+.blog-editor-container {
+  margin-bottom: 50px;
+  margin-left: 20px;
+  margin-right: 20px; }
+  .blog-editor-container .editor-heading-row {
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 0px; }
+    .blog-editor-container .editor-heading-row .editor-heading-text {
+      flex-grow: 1;
+      text-align: center; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,54 @@
+.test-series-panel-container{
+    flex-grow: 1;
+    .heading-row{
+        .back-button{
+            position: relative;
+            top: 0;
+            left: 0;
+            margin:auto; 
+        }
+        .heading-text{            
+            padding:10px;       
+            text-transform: uppercase;
+            font-family: 'Times New Roman';
+            font-weight: bold;
+        }
+        .heading-detail-row{
+          //  border:  1px solid red;
+            .timer-col{
+                  background-color: yellow;
+                  padding: 5px 5px 5px 5px;
+            }
+            .instructions-col{                
+                padding-left: 10px;
+            .instructions-btn{               
+            }
+    
+        }
+
+            .submit-col{
+              
+                flex-grow: 1;
+                text-align: right;
+            .submit-btn{
+              
+            }
+
+        }
+   
+           
+        }
+        
+    }
+    .instructions-row{
+        margin-left:15px; 
+        margin-right:15px; 
+        .instructions-heading{
+            font-family: 'Times New Roman';
+            font-weight: bold;
+        }
+        .instructions-container{
+           // border: 1px solid;
+        }
+    }
+}

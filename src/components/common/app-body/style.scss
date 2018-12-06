@@ -1,0 +1,18 @@
+.app-body-container{ 
+    .heading-row{
+        justify-content: center;
+        padding: 20px 0px;
+        background: #ffeeda;
+        color: black;
+        .heading-col{
+            .heading-text{
+                color: inherit;
+                font-family: "Open Sans",sans-serif;
+                letter-spacing: 0.3px;
+                box-sizing: border-box;
+                text-transform: capitalize;
+                font-size: 24px;
+            }
+        }
+    }
+}

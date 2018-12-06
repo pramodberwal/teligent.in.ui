@@ -1,0 +1,29 @@
+.topic-editor-container {
+  margin-bottom: 50px;
+  margin-left: 20px;
+  margin-right: 20px; }
+  .topic-editor-container .editor-heading-row {
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 0px; }
+    .topic-editor-container .editor-heading-row .editor-heading-text {
+      flex-grow: 1;
+      text-align: center; }
+  .topic-editor-container .editor-detail-row {
+    margin-right: 10px; }
+    .topic-editor-container .editor-detail-row .topic-resource-container .resource-row {
+      border: 1px solid red;
+      justify-content: center; }
+      .topic-editor-container .editor-detail-row .topic-resource-container .resource-row .resource-col {
+        border: 1px solid green; }
+      .topic-editor-container .editor-detail-row .topic-resource-container .resource-row .resource-title {
+        margin-right: 10px; }
+      .topic-editor-container .editor-detail-row .topic-resource-container .resource-row .resource-remove-btn {
+        margin-left: 10px;
+        color: red;
+        cursor: pointer; }
+      .topic-editor-container .editor-detail-row .topic-resource-container .resource-row .add-resource-btn {
+        margin-left: 10px; }
+
+/*# sourceMappingURL=style.css.map */

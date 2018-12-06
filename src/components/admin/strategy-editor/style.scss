@@ -1,0 +1,16 @@
+.strategy-editor-container{
+    margin-bottom:50px;
+    margin-left:20px;
+    margin-right:20px;
+    .editor-heading-row{
+        justify-content: center;
+        align-items: center;
+        margin-left: 0px;
+        margin-right: 0px;
+        .editor-heading-text{
+            flex-grow: 1;
+            text-align: center;
+           
+        }
+    }
+}

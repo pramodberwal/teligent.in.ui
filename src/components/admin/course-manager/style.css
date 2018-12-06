@@ -1,0 +1,13 @@
+.course-manager-container {
+  margin-bottom: 50px; }
+  .course-manager-container .heading-row {
+    margin-left: 30px; }
+  .course-manager-container .mobile-heading {
+    display: none; }
+  @media only screen and (max-width: 767px) {
+    .course-manager-container .desktop-heading {
+      display: none; }
+    .course-manager-container .mobile-heading {
+      display: block; } }
+
+/*# sourceMappingURL=style.css.map */

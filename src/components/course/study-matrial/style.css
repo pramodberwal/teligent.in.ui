@@ -1,0 +1,37 @@
+.study-matrial-container .navigation-row {
+  background-color: #4a1e11; }
+  .study-matrial-container .navigation-row .navigation-col .study-matrial-list {
+    margin: 0px;
+    list-style: none; }
+    .study-matrial-container .navigation-row .navigation-col .study-matrial-list .study-matrial-item {
+      display: inline-block;
+      margin-right: 15px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      color: rgba(255, 255, 255, 0.85); }
+      .study-matrial-container .navigation-row .navigation-col .study-matrial-list .study-matrial-item a {
+        color: rgba(255, 255, 255, 0.85); }
+        .study-matrial-container .navigation-row .navigation-col .study-matrial-list .study-matrial-item a.active {
+          background-color: #e84343;
+          border-radius: 24px;
+          padding: 5px;
+          text-decoration: none; }
+.study-matrial-container .paper-box {
+  text-align: center;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #6f5b5b;
+  color: #f9f9f9;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); }
+.study-matrial-container .book-container .book-box {
+  cursor: pointer; }
+.study-matrial-container .book-summary-container {
+  background: #d6d3d3;
+  color: #818181; }
+  .study-matrial-container .book-summary-container .book-image-box {
+    padding: 20px; }
+.study-matrial-container .navigation-row-stick {
+  position: fixed; }
+
+/*# sourceMappingURL=style.css.map */

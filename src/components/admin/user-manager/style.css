@@ -1,0 +1,7 @@
+.user-manager-container .heading-row {
+  margin-left: 30px; }
+@media only screen and (max-width: 767px) {
+  .user-manager-container .user-manager-table .desktop-heading {
+    display: none; } }
+
+/*# sourceMappingURL=style.css.map */

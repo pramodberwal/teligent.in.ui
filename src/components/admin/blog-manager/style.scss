@@ -1,0 +1,22 @@
+.blog-manager-container{
+    .heading-row{
+        margin-left: 30px;
+    }
+    .blog-summary-row{
+        background-color: #8b6666;
+        color: white;
+        text-align: center;
+        .blog-edit-btn{
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+        .blog-delete-btn{            
+            margin-right: 5px;
+        }
+    }
+    .blog-Description{
+        background-color: #f3fff3;
+        font-family: 'Dancing Script', cursive;
+    }
+    
+}

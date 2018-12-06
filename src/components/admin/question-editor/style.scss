@@ -1,0 +1,21 @@
+.question-editor-container{
+    margin-bottom: 50px;
+    margin-left: 10px;
+   // border:1px solid red;
+    .question-editor-heading-row{
+        margin-left: 30px;
+        .question-editor-heading{
+            text-align: center;
+            flex-grow: 1;
+        }
+    }
+
+    .invalid-field {       
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 80%;
+        color: #dc3545;
+    }
+    
+}
+

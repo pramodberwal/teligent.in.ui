@@ -1,0 +1,67 @@
+.rich-text-editor-container .text-area-custom {
+  border: none;
+  overflow: visible;
+  outline: none;
+  overflow: -webkit-paged-x;
+  overflow: hidden;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none; }
+.rich-text-editor-container .help-icon {
+  cursor: pointer;
+  padding-right: 10px; }
+.rich-text-editor-container .help-info-container {
+  width: 0;
+  display: none; }
+.rich-text-editor-container .help-info-container-active {
+  display: inline;
+  padding: 5px;
+  background-color: green;
+  color: white; }
+.rich-text-editor-container .read-writer .tool-bar-row .tool-bar-col {
+  margin-left: 0px;
+  margin-right: 10px; }
+  .rich-text-editor-container .read-writer .tool-bar-row .tool-bar-col .tool-icon {
+    cursor: pointer;
+    margin-right: 6px; }
+  .rich-text-editor-container .read-writer .tool-bar-row .tool-bar-col .toggler-active {
+    background-color: red; }
+  .rich-text-editor-container .read-writer .tool-bar-row .tool-bar-col .special-character-container {
+    display: none;
+    width: 0; }
+  .rich-text-editor-container .read-writer .tool-bar-row .tool-bar-col .special-character-container-active {
+    display: block; }
+.rich-text-editor-container .read-writer .rich-text-editor {
+  border: 1px solid green; }
+.rich-text-editor-container .editor {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 2px;
+  box-shadow: inset 0px 1px 8px -3px #ABABAB;
+  background: #fefefe; }
+.rich-text-editor-container .editor:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed; }
+.rich-text-editor-container .read-write {
+  cursor: text; }
+.rich-text-editor-container .read-write:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed; }
+.rich-text-editor-container .options {
+  margin-bottom: 20px; }
+.rich-text-editor-container .superFancyBlockquote {
+  color: #999;
+  font-family: 'Hoefler Text', Georgia, serif;
+  font-style: italic;
+  text-align: center; }
+
+.rich-text-editor-container:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed; }
+
+/*# sourceMappingURL=style.css.map */

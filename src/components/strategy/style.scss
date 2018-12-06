@@ -1,0 +1,28 @@
+.strategy-container{
+    .strategy-navigation-container{
+       // border: 1px solid red;
+       box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+       margin-top: 2rem; 
+       padding: 20px;
+        .active{
+            background-color: rgb(12, 11, 11);
+            color: white;
+            padding:5px 5px;
+        }
+    }
+    .strategy-detail-container{
+        border-left: 1px solid black;
+        margin-left:10px;  
+        .strategy-summary-header{
+            text-align: center;
+            background-color: #8b6666;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 5px 0px;
+        }
+        .strategy-Description{
+            background-color: #f3fff3;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    }
+}

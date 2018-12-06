@@ -1,0 +1,54 @@
+@import '../../style-vars.scss';
+.subject-editor-container{
+    margin-bottom:50px;
+    margin-left:20px;
+    margin-right:20px;
+    .editor-heading-row{
+       // border:1px solid red;
+        justify-content: center;
+        align-items: center;
+        margin-left: 30px;
+        margin-right: 0px;
+        .back-btn{
+            //border:1px solid blue;
+        }
+        .editor-heading-text{
+            flex-grow: 1;
+            text-align: center;
+           
+        }
+    }
+    .editor-detail-row{     
+        margin-right: 10px; 
+        .subject-resource-container{
+           
+            .resource-row{
+              //  border:1px solid red;
+                justify-content: center;
+                .resource-col{
+                 //   border:1px solid green;
+                }
+                .resource-title{
+                    margin-right: 10px;
+                }
+                .resource-remove-btn{
+                    margin-left: 10px;
+                    color: red;
+                    cursor: pointer;
+                }
+                .add-resource-btn{
+                    margin-left: 10px;
+                }
+
+            }
+           
+        }
+    }
+
+   /*  @media only screen and (max-width:$mobile-break-point){
+        .editor-heading-row{           
+            margin-left: 30px;
+            margin-right: 10px; 
+        }
+    } */
+}

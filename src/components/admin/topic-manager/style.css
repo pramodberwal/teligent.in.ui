@@ -1,0 +1,12 @@
+.topic-manager-container {
+  margin-bottom: 50px;
+  margin-left: 40px; }
+  .topic-manager-container .topic-manager-table .mobile-heading {
+    display: none; }
+  @media only screen and (max-width: 767px) {
+    .topic-manager-container .topic-manager-table .desktop-heading {
+      display: none; }
+    .topic-manager-container .topic-manager-table .mobile-heading {
+      display: block; } }
+
+/*# sourceMappingURL=style.css.map */

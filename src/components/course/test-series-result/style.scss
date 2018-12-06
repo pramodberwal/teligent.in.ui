@@ -1,0 +1,16 @@
+.test-series-result-container{
+    .heading-row{
+       // border: 1px solid red;
+        text-align: center;
+        padding:10px;
+        .heading-text{
+            text-transform: uppercase;
+        }
+    }
+    .score-container{
+       // border: 1px solid red;
+        .score-container-chart-col{
+            width: 50%;
+        }
+    }
+}

@@ -1,0 +1,53 @@
+.default-course-home-container{
+    
+    .course-heading-row{
+        justify-content: center;
+        padding: 10px 0px;
+        .heading-col{
+            .course-heading-text{
+                
+                    font-family: "Open Sans",sans-serif;
+                    letter-spacing: 0.3px;
+                    box-sizing: border-box;
+                    text-transform: capitalize;
+                    font-size: 24px;
+
+            }
+        }
+    }
+    .course-options-row{
+        .course-options-col{
+            .course-options-text{              
+                font-family: "Open Sans",sans-serif;
+                    letter-spacing: 0.3px;
+                    box-sizing: border-box;
+                    text-transform: capitalize;
+                    font-size: 24px;
+            }
+        }
+    }
+    .course-options-item-row{
+        padding: 20px;
+        .on-line-doubts-link{
+            background-color: #90884e!important;
+        }
+        .course-options-item-col{
+            flex-grow: 1;
+            text-align: center;
+            border: 1px solid black;
+            padding: 20px;
+            margin: 20px;
+            background: blue;
+            .course-options-text{  
+                cursor:  pointer;             
+                font-family: "Open Sans",sans-serif;
+                letter-spacing: 0.3px;
+                box-sizing: border-box;
+                text-transform: capitalize;
+                font-size: 24px;
+                padding: 20px;
+            }
+        }
+    }
+
+}

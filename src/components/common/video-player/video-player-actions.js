@@ -1,0 +1,7 @@
+let VIDEO_PLAY_ACTIONS = {
+    'PLAY_VIDEO':'PLAY_VIDEO',
+};
+
+export default VIDEO_PLAY_ACTIONS;
+
+ 

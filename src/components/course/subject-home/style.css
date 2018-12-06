@@ -1,0 +1,62 @@
+.subject-home-container .subject-heading-row {
+  text-align: center;
+  align-items: center; }
+  .subject-home-container .subject-heading-row .subject-heading-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 0.3px; }
+  .subject-home-container .subject-heading-row .chapter-index-toggler-col .chapter-index-toggler {
+    width: 50px;
+    height: 50px; }
+.subject-home-container .resource-text-row {
+  margin-left: -10px; }
+  .subject-home-container .resource-text-row .resource-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 0.3px; }
+.subject-home-container .subject-resources-row {
+  display: flex; }
+  .subject-home-container .subject-resources-row a {
+    text-decoration: none; }
+  .subject-home-container .subject-resources-row .resource-col {
+    border-right: 1px solid;
+    padding-right: 5px;
+    padding-left: 5px; }
+    .subject-home-container .subject-resources-row .resource-col .resource-title {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 24px;
+      letter-spacing: 0.3px; }
+.subject-home-container .chapter-list-container {
+  border: 1px solid red;
+  width: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  position: fixed;
+  margin-left: -100%;
+  transition: all 0.5s ease-in-out 0.1s;
+  -webkit-transition: all 0.5s ease-in-out 0.1s; }
+  .subject-home-container .chapter-list-container .chapter-list {
+    padding-bottom: 50px;
+    height: 350px;
+    overflow-y: scroll;
+    list-style: none;
+    width: 75%;
+    background-color: #fff; }
+    .subject-home-container .chapter-list-container .chapter-list .list-item {
+      padding: 5px 5px; }
+      .subject-home-container .chapter-list-container .chapter-list .list-item .chapter-text {
+        letter-spacing: 0.3px;
+        text-transform: capitalize;
+        font-size: 1.5rem;
+        font-family: "Open Sans",sans-serif;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0); }
+  .subject-home-container .chapter-list-container.show {
+    margin-left: 0;
+    width: 100%; }
+@media only screen and (max-width: 767px) {
+  .subject-home-container .subject-test-series-table .desktop-heading {
+    display: none; } }
+
+/*# sourceMappingURL=style.css.map */

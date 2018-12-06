@@ -1,0 +1,35 @@
+.user-editor-container{
+    margin-left:10px;
+    margin-bottom:50px;
+    .heading-row{
+        margin-left:30px;
+    }
+   // border: 1px solid red;
+    .editor-container{
+      //  border: 1px solid green;
+        margin-left:0px;
+        margin-right:0px;       
+        .editor-form{            
+            margin-left:0px;
+            margin-right:0px;
+            flex-grow: 1;
+            .editor-row{
+                .role-row{                    
+                    margin-left:10px;
+                    .role-item{
+                        margin-right: 50px;
+                    }
+                }
+                justify-content: start;
+            //    border: 1px solid red;
+                margin-left:0px;
+            margin-right:0px;
+            .editor-row-col{
+                margin-left: 10px;
+            }
+            }
+        }
+        
+    }
+
+}

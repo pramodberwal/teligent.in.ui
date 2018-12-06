@@ -1,0 +1,62 @@
+.question-panel-container .test-series-heading-row {
+  padding-top: 20px; }
+  .question-panel-container .test-series-heading-row .test-series-heading-text {
+    text-align: center; }
+.question-panel-container .questions-navigator-col {
+  border: 1px solid black;
+  margin-right: 10px;
+  padding: 10px 10px;
+  padding-right: 0px; }
+  .question-panel-container .questions-navigator-col .question-btn {
+    padding: 0px 10px;
+    margin: 5px;
+    border: none;
+    background-color: #c8d4c8;
+    cursor: pointer; }
+    .question-panel-container .questions-navigator-col .question-btn a {
+      padding: 5px; }
+  .question-panel-container .questions-navigator-col .not-attempted {
+    background-color: #c8d4c8; }
+  .question-panel-container .questions-navigator-col .question-btn-attempted {
+    background-color: green;
+    color: white; }
+    .question-panel-container .questions-navigator-col .question-btn-attempted a {
+      color: white; }
+  .question-panel-container .questions-navigator-col .active {
+    background-color: #eedf14; }
+  .question-panel-container .questions-navigator-col .need-review {
+    background-color: red; }
+    .question-panel-container .questions-navigator-col .need-review a {
+      color: white; }
+.question-panel-container .question-description-row .question-seq {
+  margin-right: 10px;
+  font-weight: bold; }
+.question-panel-container .question-description-row .description p {
+  margin-bottom: 0px; }
+.question-panel-container .question-option-row {
+  padding: 10px; }
+  .question-panel-container .question-option-row .option-name {
+    font-weight: bold;
+    padding: 10px; }
+  .question-panel-container .question-option-row .option-value {
+    margin-right: 10px;
+    padding: 10px; }
+  .question-panel-container .question-option-row .option-description {
+    margin-left: 10px;
+    padding-top: 10px; }
+.question-panel-container .question-panel-action-row {
+  justify-content: flex-start; }
+  .question-panel-container .question-panel-action-row .previous-btn {
+    margin: 10px;
+    padding: 0px 20px; }
+  .question-panel-container .question-panel-action-row .submit-btn {
+    margin: 10px;
+    padding: 0px 20px; }
+  .question-panel-container .question-panel-action-row .skip-btn {
+    margin: 10px;
+    padding: 0px 20px; }
+  .question-panel-container .question-panel-action-row .next-btn {
+    margin: 10px;
+    padding: 0px 20px; }
+
+/*# sourceMappingURL=style.css.map */

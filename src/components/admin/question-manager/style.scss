@@ -1,0 +1,33 @@
+.question-manager-container{
+    margin-bottom: 50px;
+    .question-manager-filter-row{
+        margin-right: 0px;
+        margin-left: 5px; 
+        margin-bottom: 10px;
+        .filter-col{
+            margin-right: 10px;
+            padding: 10px 10px;            
+            
+            
+            .filter-label{
+                margin-right: 10px;
+                padding-top: 5px;
+                //border:1px solid red;
+            }
+            .filter-value{
+               
+            }
+        }
+        
+    }
+
+    .question-count-col{
+       // border: 1px solid red;
+        margin-right:20px;
+    }
+    .pagination-container{
+        justify-content: flex-end;
+       // border: 1px solid red;
+    }
+    
+}

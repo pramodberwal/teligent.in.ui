@@ -1,0 +1,37 @@
+@import '../../style-vars.scss';
+.course-editor-container{
+    margin-bottom:50px;
+    margin-left:20px;
+    margin-right:20px;
+    .editor-heading-row{
+       // border:1px solid red;
+        justify-content: center;
+        align-items: center;
+        margin-left: 30px;
+        margin-right: 0px;
+        .back-btn{
+            //border:1px solid blue;
+        }
+        .editor-heading-text{
+            flex-grow: 1;
+            text-align: center;
+           
+        }
+    }
+    .editor-detail-row{
+      //  border: 1px solid red;
+        margin-right: 10px; 
+
+        a{
+            cursor: pointer;
+            color: red;
+        }
+    }
+
+   /*  @media only screen and (max-width:$mobile-break-point){
+        .editor-heading-row{           
+            margin-left: -30px;
+            margin-right: 10px; 
+        }
+    } */
+}

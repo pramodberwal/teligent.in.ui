@@ -1,0 +1,115 @@
+.rich-text-editor-container{
+
+  .text-area-custom{
+    border: none;
+    overflow: visible;
+    outline: none;
+    overflow: -webkit-paged-x;
+    overflow: hidden;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+  }
+  .text-area-custom:focus{
+   
+  }
+  .help-icon{
+    cursor: pointer;   
+    padding-right: 10px;
+  }
+  .help-info-container{
+    width: 0;
+    display: none;
+  }
+  .help-info-container-active{    
+    display: inline;
+    padding: 5px;
+    background-color: green;
+    color: white;
+  
+  }
+  .read-writer{  
+      
+    .tool-bar-row{
+       //  border: 1px solid red;       
+         .tool-bar-col{
+        //  border: 1px solid red;
+          margin-left:0px;
+          margin-right:10px; 
+          .tool-icon{
+            cursor: pointer;
+            margin-right: 6px;
+          }
+          .toggler-active{
+             background-color: red;
+          }
+          .special-character-container{                   
+            display: none;
+            width: 0;
+          }
+          .special-character-container-active{
+            display: block;  
+           // border: 1px solid red;           
+           // background-color: red;
+          }
+
+
+         } 
+        }
+
+
+      .rich-text-editor{
+        border: 1px solid green;
+      }
+
+  }
+  .read-only{
+
+  }
+
+
+  .rich-text-editor{
+    
+   
+  }  
+  
+    .editor {
+        box-sizing: border-box;
+        border: 1px solid #ddd;        
+        padding: 16px;
+        border-radius: 2px;        
+        box-shadow: inset 0px 1px 8px -3px #ABABAB;
+        background: #fefefe;
+      }
+      .editor:focus{
+        outline: none;
+         border-color: #9ecaed;
+        box-shadow: 0 0 10px #9ecaed;
+      }
+      .read-write{
+        cursor: text;
+      }
+      .read-write:focus{
+        outline: none;
+         border-color: #9ecaed;
+        box-shadow: 0 0 10px #9ecaed;
+      }
+      
+      
+      .options {
+        margin-bottom: 20px;
+      }
+      .superFancyBlockquote {
+        color: #999;
+        font-family: 'Hoefler Text', Georgia, serif;
+        font-style: italic;
+        text-align: center;
+      }
+
+}
+.rich-text-editor-container:focus{
+  outline: none;
+         border-color: #9ecaed;
+        box-shadow: 0 0 10px #9ecaed;
+}

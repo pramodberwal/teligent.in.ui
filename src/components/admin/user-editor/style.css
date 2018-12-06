@@ -1,0 +1,24 @@
+.user-editor-container {
+  margin-left: 10px;
+  margin-bottom: 50px; }
+  .user-editor-container .heading-row {
+    margin-left: 30px; }
+  .user-editor-container .editor-container {
+    margin-left: 0px;
+    margin-right: 0px; }
+    .user-editor-container .editor-container .editor-form {
+      margin-left: 0px;
+      margin-right: 0px;
+      flex-grow: 1; }
+      .user-editor-container .editor-container .editor-form .editor-row {
+        justify-content: start;
+        margin-left: 0px;
+        margin-right: 0px; }
+        .user-editor-container .editor-container .editor-form .editor-row .role-row {
+          margin-left: 10px; }
+          .user-editor-container .editor-container .editor-form .editor-row .role-row .role-item {
+            margin-right: 50px; }
+        .user-editor-container .editor-container .editor-form .editor-row .editor-row-col {
+          margin-left: 10px; }
+
+/*# sourceMappingURL=style.css.map */

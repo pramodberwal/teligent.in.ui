@@ -1,0 +1,36 @@
+@import '../../style-vars.scss';
+.chapter-home-container{
+    //margin-right: 10px;
+    //margin-left: 10px;
+   // padding-left: 10px;
+   // width: 99%;
+   // border: 1px solid green;
+   // flex-grow: 1;   
+    .chapter-heading-row{
+        padding-top: 10px; 
+        flex-grow:1;
+        text-align: center;
+       // border: 1px solid rgb(43, 32, 38);
+        .chapter-heading-text{            
+           // font: outline;
+          //  font-weight:bold;
+        }
+    }
+
+    .chapter-resources-row{
+        display: flex;
+       // border: 1px solid red;
+        .resource-col{
+            margin: 10px;
+            padding: 10px;
+            border-right: 1px solid;
+        }
+        
+    }
+    .chapter-description-row{
+        
+    }
+
+   
+
+}

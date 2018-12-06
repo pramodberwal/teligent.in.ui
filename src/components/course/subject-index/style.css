@@ -1,0 +1,17 @@
+.subject-index-container {
+  justify-content: center;
+  background-color: #4a1e11; }
+  .subject-index-container .subject {
+    padding: 10px; }
+    .subject-index-container .subject .subject-text {
+      color: rgba(255, 255, 255, 0.85);
+      font-family: "Open Sans",sans-serif;
+      letter-spacing: 0.3px;
+      text-transform: capitalize; }
+    .subject-index-container .subject .active {
+      background-color: #e84343;
+      border-radius: 240px;
+      padding: 10px;
+      text-decoration: none; }
+
+/*# sourceMappingURL=style.css.map */

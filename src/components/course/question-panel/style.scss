@@ -1,0 +1,99 @@
+.question-panel-container{
+    .test-series-heading-row{
+        padding-top: 20px;
+       // border: 1px solid red;
+        .test-series-heading-text{
+            text-align: center;
+        }
+    }
+
+    .questions-navigator-col{
+        border: 1px solid black;
+        margin-right: 10px;
+        padding:10px 10px; 
+        padding-right: 0px;
+
+        .question-btn{
+            padding:0px 10px;
+            margin: 5px;
+            border: none;
+            background-color: rgb(200, 212, 200);
+            cursor: pointer;
+            a{               
+                padding:5px;
+            }
+        }
+        .not-attempted{
+            background-color: rgb(200, 212, 200);
+           
+        }
+        .question-btn-attempted{
+           background-color: green;
+           color:white;
+           a{
+               color:white;
+           }
+        }
+
+        .active{
+            background-color: rgb(238, 223, 20);
+        }
+        .need-review{
+            background-color: red;
+            a{
+                color:white;
+            }
+         }
+        
+
+    }
+    .questions-panel-col{
+       // border: 1px solid red;
+    }
+    .question-description-row{
+        .question-seq{
+            margin-right: 10px; 
+            font-weight:bold; 
+        }
+        .description{
+            // border: 1px solid red;
+             p{
+                 margin-bottom: 0px;
+             }      
+        }
+    }
+    .question-option-row{
+        padding: 10px;
+        .option-name{
+            font-weight:bold;
+            padding:10px;
+        }
+        .option-value{
+            margin-right: 10px;
+            padding:10px;
+        }
+        .option-description{
+            margin-left: 10px;
+            padding-top:10px;
+        }
+    }
+    .question-panel-action-row{
+        justify-content: flex-start;
+        .previous-btn{
+            margin: 10px;
+            padding:0px 20px;
+        }
+        .submit-btn{
+            margin: 10px;
+            padding:0px 20px;
+        }
+        .skip-btn{
+            margin: 10px;
+            padding:0px 20px;
+        }
+        .next-btn{
+            margin: 10px;
+            padding:0px 20px;
+        }
+    }
+}

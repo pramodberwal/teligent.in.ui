@@ -1,0 +1,25 @@
+.course-editor-container {
+  margin-bottom: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  /*  @media only screen and (max-width:$mobile-break-point){
+       .editor-heading-row{           
+           margin-left: -30px;
+           margin-right: 10px; 
+       }
+   } */ }
+  .course-editor-container .editor-heading-row {
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 0px; }
+    .course-editor-container .editor-heading-row .editor-heading-text {
+      flex-grow: 1;
+      text-align: center; }
+  .course-editor-container .editor-detail-row {
+    margin-right: 10px; }
+    .course-editor-container .editor-detail-row a {
+      cursor: pointer;
+      color: red; }
+
+/*# sourceMappingURL=style.css.map */
