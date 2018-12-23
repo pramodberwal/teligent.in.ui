@@ -39,7 +39,7 @@ let convertQuestionToSave = (question)=>{
  questionDetailToSave.optionB = JSON.stringify(questionDetailToSave.optionB.toJSON());
  questionDetailToSave.optionC = JSON.stringify(questionDetailToSave.optionC.toJSON());
  questionDetailToSave.optionD = JSON.stringify(questionDetailToSave.optionD.toJSON()); 
- questionDetailToSave.explanation = JSON.stringify(questionDetailToSave.explanation.toJSON()); 
+ questionDetailToSave.explanation = questionDetailToSave.explanation?JSON.stringify(questionDetailToSave.explanation.toJSON()):Value.fromJSON(defaultValue); 
  return questionDetailToSave;
 };
 
@@ -272,7 +272,15 @@ handleSave = ()=>{
    if(this.state.question.id){
     this.setState({savingInProgress:false,isError:false,message:'Question is saved!'});
    }else{
-    this.setState({savingInProgress:false,isError:false,message:'Question is saved!',question:{},correctAnswers:{}});
+    let question = this.state.question;
+    question.desc=defaultValue;
+    question.optionA=defaultValue;
+    question.optionB=defaultValue;
+    question.optionC=defaultValue;
+    question.optionD=defaultValue;
+    question.explanation=defaultValue;
+    question.answer='';
+    this.setState({savingInProgress:false,isError:false,message:'Question is saved!',question:question,correctAnswers:{}});
    }
    
   })
@@ -285,6 +293,10 @@ handleSave = ()=>{
 
 render(){
  let {question} = this.state; 
+
+ if(question && !question.typeId ){
+  question.typeId=SINGLE_CHOICE_QUESTION_TYPE_ID;
+ }
 
  let subjectOptionHtml = Array.isArray(this.state.subjects)?this.state.subjects.map((subject,index)=>{
   return (<option key={index} value={subject.id}>{subject.name}</option>);

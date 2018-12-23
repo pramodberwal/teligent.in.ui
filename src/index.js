@@ -29,7 +29,10 @@ let store = createStore(appReducer,applyMiddleware(thunk));
 
 ReactDOM.render(
  <Provider store={store}>  
-  <Router basename="/"> 
+  <Router basename="/" getUserConfirmation={(message,callback)=>{
+   const allowTransition = window.confirm(message); 
+   callback(allowTransition);
+  }}> 
    <RootComp />    
   </Router>
  </Provider>, 

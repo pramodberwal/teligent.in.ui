@@ -144,16 +144,12 @@ export let startExamAttempt = (id)=>{
 };
 
 export let finishExamAttempt = (examId,examAttempt, testAttempts)=>{
- ///mockexam/{examId}/attempt/finish
+
  let promise = new Promise((resolve,reject)=>{
-  console.log('Exam attempt>>>>',examAttempt);
-  let data = {examResponse:{
+  let data = {
    examAttempt:examAttempt,
-   testAttempts:testAttempts
-  }
-  };
-   
-  console.log('Data >?', data);
+   testAttempts:testAttempts  
+  };   
   instance.post("/mockexam/"+examId+"/attempt/finish",JSON.stringify(data)).then(resp => {
    resolve({examAttempt:resp.data.examAttempt,testAttempts:resp.data.testAttempts});
   }).catch(error =>{   

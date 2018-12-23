@@ -12,10 +12,12 @@ export default class ExamResultComponent extends React.Component{
     let exam = this.props.location.state.exam;
     let examAttempt= this.props.location.state.examAttempt;
     let testAttempts = this.props.location.state.testAttempts;
+    
     if(!exam || !examAttempt || !testAttempts){
      this.setState({isError:true,message:'Error while calculating exam result!'});
      return;
     }
+
     this.setState({isError:false, message:'',
      examAttempt:examAttempt,
      testAttempts:testAttempts,

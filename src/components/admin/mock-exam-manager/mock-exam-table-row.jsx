@@ -10,6 +10,7 @@ export let MockExamTableHeaderRow = (props)=>{
    <th scope="col"  ><span className="text-style">Course Name</span></th>     
    <th scope="col" ><span className="text-style">Status</span></th> 
    <th scope="col" ><span className="text-style"></span></th> 
+   <th scope="col" ><span className="text-style"></span></th> 
   </tr>
  );
 };
@@ -24,6 +25,13 @@ export class MockExamTableBodyRow extends React.Component{
     <td  ><span className="text-style">{props.mockExam.startDateTime?moment(props.mockExam.startDateTime).format('DD/MM/YYYY hh:mm A'):''}</span></td>
     <td   ><span className="text-style">{props.mockExam.courseName}</span></td>
     <td  ><span className="text-style">{props.mockExam.active?'Active':'Not Active'}</span></td>
+    <td  ><span className="text-style">
+     <button className="btn btn-primary"
+      onClick={()=>this.props.onDoubleClick(props.mockExam.id)}
+     ><span className="text-style">Edit</span></button>
+    </span>
+    
+    </td>
     <td  ><span className="text-style">
      <button className="btn btn-danger"
       onClick={()=>this.props.onDeleteClick(props.mockExam.id)}

@@ -31,6 +31,7 @@ onDeleteClick = (id)=>{
    this.setState({isError:true, message:'Error while deleting the exam!'});
   });
 }
+
   onDoubleClick = (id)=>{
    this.props.history.push(`${this.props.match.url}/edit-mock-exam/`+id);
   }

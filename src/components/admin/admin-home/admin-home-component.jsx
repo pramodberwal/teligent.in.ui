@@ -21,6 +21,11 @@ class AdminHome extends React.Component{
   state={
    navigationOpen:false
   }
+componentDidMount = ()=>{
+ let rootElement =$('#root');
+ rootElement.on('click',this.closeNavigationPanel);
+}
+
   closeNavigationPanel = ()=>{  
    $('#demo').addClass("d-none");
   }
@@ -45,7 +50,7 @@ class AdminHome extends React.Component{
          <NavLink className="admin-navigator-item"
           to={`${this.props.match.url}/user-manager`} activeClassName="admin-navigator-item-active" > User Manager </NavLink>
         </div>        
-        <div className="admin-navigator-items-item">
+        <div className="admin-navigator-items-item" >
          <NavLink className="admin-navigator-item" to={`${this.props.match.url}/subject-manager`} activeClassName="admin-navigator-item-active"> Subject Manager </NavLink>
         </div>
         <div className="admin-navigator-items-item">

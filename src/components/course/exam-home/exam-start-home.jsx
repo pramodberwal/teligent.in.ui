@@ -1,5 +1,6 @@
 import React from 'react';
 import * as _ from 'lodash';
+import * as $ from 'jquery';
 import {Link} from 'react-router-dom';
 import {Prompt} from 'react-router-dom';
 import TimerComponent from '../../helper/timer';
@@ -18,19 +19,18 @@ export default class ExamStartHome extends React.Component{
      examStarted:true,
      attemptedQuestions:{},
      testStarted:{}, 
+     examFinished:false,
      examAttempt:{},
      testAttempts:{},
-     questionPanelStates:{}
+     questionPanelStates:{},
+     examStartHome:''
     }
-
-   
     componentDidMount=()=>{
      startExamAttempt(this.props.examId)
       .then(attemptData =>{
        getMockExamByIdPublic(attemptData.examAttempt.examId)
         .then(examData =>{
-         console.log('Exam attempt >');
-         this.setState({isError:false, message:'',examAttempt:attemptData.examAttempt,exam:examData.mockExam});
+         this.setState({isError:false,examStartHome:this.props.match.url, message:'',examFinished:false,examAttempt:attemptData.examAttempt,exam:examData.mockExam});
         })
         .catch(error =>{
          console.error('Error while loading the exam ',error);
@@ -42,11 +42,17 @@ export default class ExamStartHome extends React.Component{
        this.setState({isError:true, message:error.message});
       });
     }
+
+    componentWillUnmount =()=>{
+     if(!this.state.examFinished || !this.state.exam){
+      return;
+     }
+    }
+
     onOptionSelect = (questionPanelState)=>{ 
      let testAttempts = this.state.testAttempts;
      let activeTestAttempt = testAttempts[this.state.activeTest.id];
-     activeTestAttempt['attemptAnswers']=questionPanelState['attemptedQuestions'];
-      
+     activeTestAttempt['attemptAnswers']=questionPanelState['attemptedQuestions'];      
      let questionPanelStates = this.state.questionPanelStates;
      questionPanelStates[this.state.activeTest.id] = questionPanelState;
 
@@ -69,19 +75,29 @@ export default class ExamStartHome extends React.Component{
       });
     }
 
-    onExamFinish =()=>{
-
+    onExamFinish =()=>{   
+     let done = window.confirm('Are you sure to submit the exam?');    
+     if(!done ){
+      return;
+     }
+     
      let examTestAttempts = [];
      _.forEach(this.state.exam.tests , t =>{
       if(this.state.testAttempts[t.id]){
+       let testAttempt = this.state.testAttempts[t.id];
+       let attemptAnswers = testAttempt['attemptAnswers'];
+       let attemptAnswersList = [];
+       let questionsList = Object.keys(attemptAnswers);
+       _.forEach(questionsList, questionId =>{
+        attemptAnswersList.push({questionId:questionId,selectedAns:attemptAnswers[questionId]});
+       });
+       testAttempt['attemptAnswers'] = attemptAnswersList;      
        examTestAttempts.push(this.state.testAttempts[t.id]);
       }
      });
-
-     this.setState({isError:false, message:'Please wait while we are validating your exam attempt'});
-     console.log(this.state.exam);
+    
      finishExamAttempt(this.state.exam.id,this.state.examAttempt,examTestAttempts)
-      .then(attemptData =>{
+      .then(attemptData =>{       
        this.props.history.push({
         pathname:`${this.props.match.url}/finish/`+this.state.exam.id,
         state:{
@@ -89,10 +105,10 @@ export default class ExamStartHome extends React.Component{
          testAttempts:attemptData.testAttempts,
          exam:this.state.exam
         }});
-       
       })
       .catch(error =>{
-       this.setState({isError:true, message:error.message});
+       console.log('Error while submitting the exam.');
+       this.setState({isError:true,message:'Error while submitting the exam!'});       
       });
     }
 
@@ -101,8 +117,7 @@ export default class ExamStartHome extends React.Component{
      let activeTest = {};
      if(Array.isArray(tests)){
       activeTest = _.find(tests, t => Number(t.id) === Number(testId));
-     }
-     
+     }     
      this.setState({activeTest:activeTest});
     }
 
@@ -127,20 +142,32 @@ export default class ExamStartHome extends React.Component{
        </div>
       </div>;
      }
-    
      return <div className="container-fluid exam-start-home-container">
-      <Prompt when={this.state.examAttempt}
-       message="Are you sure you finished the exam?"
+      <Prompt when={this.state.examStarted}
+       message={
+        (location) =>{
+         return (location.pathname && location.pathname.indexOf('/finish')>0)?true:"Are you sure to leave the exam?";
+        } 
+       } 
       />
       <div className=" row heading-row ">        
        <div className="mx-auto"><span className="text-style">{this.state.exam.name}</span></div>
+      </div>
+      <div className="row justify-content-center">
+       <div className="text-center">      
+        {this.state.message?
+         <div className={"alert "+ (this.state.isError?' alert-danger':'alert-success') }>
+          {this.state.message}       
+         </div>:''}
+       </div>
       </div>
       <div className="row">
        <TogglerComp exam={this.state.exam}/>
       </div>  
       <div className="row timmer-row">
        <div className="timer-col">       
-        <TimerComponent 
+        <TimerComponent
+         startTime={this.state.exam.startDateTime}
          hour={0}
          minutes={this.state.exam.durationMinutes ?this.state.exam.durationMinutes:0}
          seconds={0}
