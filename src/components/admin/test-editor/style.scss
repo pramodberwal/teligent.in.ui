@@ -1,0 +1,89 @@
+.test-container{ 
+   // border: 1px solid red;
+    
+    .test-heading-row{
+        //border: 1px solid red;
+        margin-left: 30px;
+        .back-button{  }
+        .test-heading{
+          //  border: 1px solid;
+            flex-grow: 1;
+            text-align: center;
+        }        
+    }
+    .test-editor-form-row{   
+        margin-left: 10px;    
+        .test-editor-form{
+
+            .align-items-center{
+                align-items: center;
+            }
+            .form-check-input-custom{
+                margin-top: -0.3rem;
+            }
+            
+           
+            .state-time-level{
+                align-items: baseline;
+            }
+            .test-detail-row{
+              //  border: 1px solid green;
+                margin-right: 20px; 
+                margin-left: 10px; 
+                justify-content: space-around;
+                .duration-col{
+                   // border: 1px solid red;
+
+                }
+                
+                 
+            }
+            flex-grow: 1;
+            .instruction-row{
+                padding-right: 50px;
+               // border:1px solid red;
+                margin-bottom: 10px;
+                .instruction-row-item{
+                    
+                    a{
+                        cursor: pointer;
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+    
+
+}
+
+.test-add-question-container{
+    margin-left: 20px;
+    .test-heading-row{
+        position: fixed;
+        width: 100%; 
+        border:1px solid green;
+        
+    }
+    .add-question-filter-row{
+        //border:  1px solid red;
+        margin-right: 0px;
+        margin-left: 0px; 
+        margin-bottom: 10px;
+        .filter-col{
+            margin-right: 10px;
+            padding: 10px 10px;            
+            
+            
+            .filter-label{
+                margin-right: 10px;
+                padding-top: 5px;
+                //border:1px solid red;
+            }
+            .filter-value{
+               
+            }
+        }
+        
+    }
+}

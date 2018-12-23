@@ -1,6 +1,6 @@
 import React from 'react';
 import * as _ from 'lodash';
-import {saveUser} from '../../../services/user-service';
+import {saveUser, passwordReset} from '../../../services/user-service';
 import {getUserById} from '../../../services/user-service';
 import {getRoles} from '../../../services/ref-data/role-service';
 
@@ -27,8 +27,8 @@ export default class UserEditorComponent extends React.Component{
    roles:[],
   };
 
-  componentWillMount = ()=>{
-
+  componentDidMount = ()=>{
+   window.scroll(0,0);
    getRoles()
     .then(roleData =>{
      if(this.props.userId){
@@ -69,7 +69,7 @@ export default class UserEditorComponent extends React.Component{
 
   onSave=()=>{
    window.scroll(0,0);
-   if(this.state.user.password && this.state.user.password !== this.state.confirmPassword ){    
+   if(!this.state.user.id &&this.state.user.password && this.state.user.password !== this.state.confirmPassword ){    
     this.setState({isError:true, message:'Password and confirm password not matching!'});
     return;
    }
@@ -121,7 +121,15 @@ export default class UserEditorComponent extends React.Component{
    this.setState({user:{...this.state.user,address:newAddress}});
   }
 
-
+  onPasswordReset=()=>{
+   passwordReset(this.state.user.username,this.state.user.id)
+    .then(props =>{
+     this.setState({isError:false, user:props.user, message:props.message});
+    })
+    .catch(props=>{
+     this.setState({isError:true, message:props.message});
+    });
+  }
   onConfirmPasswordChange = (value)=>{
    this.setState({confirmPassword:value});
   }
@@ -157,9 +165,17 @@ export default class UserEditorComponent extends React.Component{
       <button className="btn btn-primary" onClick={this.handleBack}>
       Back
       </button>       
-      <div className="col text-center pt-2">
-       User Editor
-      </div>     
+      <div className="flex-grow-1 text-center pt-2">
+       <span className="text-style">User Editor</span>
+      </div> 
+      <div className="password-reset-col mr-4 mt-2">
+       <button className="btn btn-danger"
+        onClick={this.onPasswordReset}
+       > <span className="text-style">
+        Reset Password
+        </span></button>
+      
+      </div>       
      </div>  
      <hr className="row divider" />
      <div className="row justify-content-center">

@@ -4,7 +4,6 @@ import {getHttpInstance} from '../services/httputil';
 
 let http = getHttpInstance(ACCOUNT_SERVICE_BASE_URL);
 
-let USER_STORE = [];
 let csrfToken = '';
 export let getAllUser = ()=>{
  let promise = new Promise((resolve,reject)=>{
@@ -15,8 +14,7 @@ export let getAllUser = ()=>{
       resolve({login:true});
       return;
      }
-     USER_STORE = resp.data;
-     resolve({users:USER_STORE});
+     resolve({users:resp.data});
     })
     .catch(error =>{
      console.log('Error while fetching users!', error);
@@ -38,6 +36,40 @@ export let getCsrfToken = ()=>{
   .catch(error =>{
    console.log('Error while getting csrf token!');
   });
+};
+
+export let passwordChange  =(currentPassword, newPassword)=>{
+ let promise = new Promise((resolve,reject)=>{
+  http.post('/user/password/change',{currentPassword:currentPassword,newPassword:newPassword},
+   {headers:{[csrfToken.headerName]:csrfToken.token}})
+   .then(reps =>{
+    resolve({message:'Password change successfully!'});
+   })
+   .catch(error =>{
+    reject({message:'Error while changeing password'});
+   });
+ });
+ return promise;
+};
+
+export let passwordReset = (username,id)=>{
+ let promise = new Promise((resolve,reject)=>{
+  http.post('/user/password/reset',{username:username},{headers:{[csrfToken.headerName]:csrfToken.token}})
+   .then(resp =>{
+    getUserById(id)
+     .then(userResp =>{      
+      resolve({user:userResp.user,message:'Password reset success, new password = '+resp.data.user.password});
+     })
+     .catch(error =>{
+      reject({message:'Error while resetting the password!'});
+     });   
+   })
+   .catch(error =>{
+    console.log(error);
+    reject({message:'Error while resetting the password!'});
+   });
+ });
+ return promise;
 };
 
 export let getUserById =(id) =>{
@@ -83,13 +115,7 @@ export let saveUser =(user) =>{
 export let deleteUser =(id) =>{
  let promise = new Promise((resolve,reject)=>{
   try{
-   let index = _.findIndex(USER_STORE,u=>Number(u.id)===Number(id));
-   if(index > -1){ 
-    _.remove(USER_STORE, u => Number(u.id) === Number(id));
-    resolve({message:'User deleted successfully!'});
-   }else{
-    reject({message:'User not found!'});
-   }   
+   resolve({message:'This operation is not supported!'});  
   }catch(error){
    reject({message:error});
   }

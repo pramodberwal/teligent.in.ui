@@ -40,7 +40,6 @@ export let saveRecommendedBook = (recommendedBook, files)=>{
     let formData = new FormData();   
     formData.append('studyMatrialId',resp.data.id);
     formData.append('file',files.files[0]);
-    console.log('Uploading eBook...');
     instance.post('/studymaterial/upload',formData)
      .then(fileResp =>{
       resolve({recommendedBook:recommendedBook});

@@ -9,6 +9,7 @@ import {getAllSubjects} from '../../../services/ref-data/subject';
 import {getChaptersBySubject} from '../../../services/ref-data/chapter';
 import {getTopicsByChapter} from '../../../services/ref-data/topic';
 import {defaultValues} from './initial-value';
+import {COMPLEXITY_LEVELS, SINGLE_CHOICE_QUESTION_TYPE_ID} from '../../../constants/system-constant';
 import { saveQuestion, getQuestionById , getAllChoices, getAnswer } from '../../../services/questions/question-service';
 
 let defaultValue={
@@ -66,6 +67,8 @@ state={
  chapters:[],
  topics:[],
  questionChoices:[],
+ correctAnswers:{},
+ answers:[],
 }
 componentDidMount = ()=>{
  if(this.props.questionId){
@@ -75,9 +78,16 @@ componentDidMount = ()=>{
      .then(answerData =>{
       let questionForEditor = convertQuestionToEditor(data.question);
       questionForEditor.answer = answerData.answerKey.answer;
+      let correctAnswers={};  
+      if(questionForEditor.answer){
+       correctAnswers['A']= questionForEditor.answer.indexOf('A')>-1?true:false;
+       correctAnswers['B']= questionForEditor.answer.indexOf('B')>-1?true:false;
+       correctAnswers['C']= questionForEditor.answer.indexOf('C')>-1?true:false;
+       correctAnswers['D']= questionForEditor.answer.indexOf('D')>-1?true:false;  
+      }
       questionForEditor.explanation = answerData.answerKey.explanation?Value.fromJSON(JSON.parse(answerData.answerKey.explanation)):
        Value.fromJSON(defaultValue);  
-      this.setState({question:questionForEditor});
+      this.setState({question:questionForEditor,correctAnswers:correctAnswers});
      });     
     if(data.question.subjectId){
      getChaptersBySubject(data.question.subjectId)
@@ -157,10 +167,7 @@ handleOnChapterChange = (chapterId)=>{
    topics:data.topics});
   });
  }    
-}  
-
- 
-
+}
  onQuestionDescChange=({value})=>{ 
   let editInProgress =this.state.editInProgress || (value.document.text !== this.state.question.desc.document.text); 
   this.setState({editInProgress:editInProgress,question:{...this.state.question,desc:value}});  
@@ -190,7 +197,26 @@ handleOnChapterChange = (chapterId)=>{
  };
 
  handleOnChange=(field,value)=>{
-  this.setState({editInProgress:true,question:{...this.state.question,[field]:value}});
+  let question = this.state.question;
+  question[field] = value;
+  let correctAnswers = this.state.correctAnswers;
+  if(field === 'typeId'){
+   question.answer='';
+   correctAnswers = {};
+  }
+  
+  this.setState({editInProgress:true,question:question,correctAnswers:correctAnswers});
+ };
+ handleCorrectAnswerChange=(option,value, typeId)=>{
+  let answers = this.state.answers;
+  let question = this.state.question;
+  let correctAnswers=this.state.correctAnswers;
+  if(typeId === 1){// Single Choice
+   question.answer=option;
+  }else{   
+   correctAnswers[option]=value;
+  }
+  this.setState({editInProgress:true,question:question,correctAnswers:correctAnswers});
  };
  handleAddTag = ()=>{
   let updatedTags  = _.cloneDeep(this.state.question.tags);
@@ -218,11 +244,36 @@ handleOnChapterChange = (chapterId)=>{
  }
 handleSave = ()=>{  
  let questionToSave = convertQuestionToSave(this.state.question);
+ let correctAnswers = this.state.correctAnswers;
+ let answers = '';
+ if(correctAnswers && Number(questionToSave.typeId) === 2){
+  answers=correctAnswers['A']?'A':answers;
+  if(!answers){
+   answers = correctAnswers['B']?'B':answers;
+  }else{
+   answers = correctAnswers['B']?answers+',B':answers;
+  }
+
+  if(!answers){
+   answers = correctAnswers['C']?'C':answers;
+  }else{
+   answers = correctAnswers['C']?answers+',C':answers;
+  }
+
+  if(!answers){
+   answers = correctAnswers['D']?'D':answers;
+  }else{
+   answers = correctAnswers['D']?answers+',D':answers;
+  }
+  questionToSave.answer=answers;
+ }
  saveQuestion(questionToSave)
   .then(data=>{
-
-   this.props.history.goBack();
-   
+   if(this.state.question.id){
+    this.setState({savingInProgress:false,isError:false,message:'Question is saved!'});
+   }else{
+    this.setState({savingInProgress:false,isError:false,message:'Question is saved!',question:{},correctAnswers:{}});
+   }
    
   })
   .catch(data =>{
@@ -239,6 +290,17 @@ render(){
   return (<option key={index} value={subject.id}>{subject.name}</option>);
  }):'';
 
+ let complexityLevels = COMPLEXITY_LEVELS.map((level,index)=>{
+  return <div key={index}>
+   <label className="radio-inline ml-2 mr-2">
+    <input type="radio" name="complexityLevel" 
+     value={level.id} 
+     checked={Number(question.complexityLevel) === Number(level.id)}
+     onChange={()=>this.handleOnChange('complexityLevel',level.id)}
+    />{level.name}</label>
+  </div>;
+ });
+
  let chapterOptionHtml = Array.isArray(this.state.chapters)?this.state.chapters.map((chapter,index)=>{
   return (<option key={index} value={chapter.id}>{chapter.name}</option>);
  }):'';
@@ -249,8 +311,18 @@ render(){
 
  let typeOptionHtml = '';
  if(Array.isArray(this.state.questionChoices)){
-  typeOptionHtml = this.state.questionChoices.map((type)=>{
-   return (<option key={type.id} value={type.id}>{type.name}</option>);
+  typeOptionHtml = this.state.questionChoices.map((type,index)=>{    
+   return (
+    <div key={index} className="form-check form-check-inline">
+     <input className="form-check-input" name="typeId" 
+      value={type.id}
+      checked={Number(type.id) === Number(question.typeId)}
+      type="radio" id="inlineCheckbox1" 
+      onChange={(e)=>this.handleOnChange('typeId',e.target.value)}
+     />
+     <label className="form-check-label" htmlFor="inlineCheckbox1">{type.name}</label>
+    </div>
+   );
   });
  }
  
@@ -333,7 +405,7 @@ render(){
        {chapterOptionHtml}    
       </select>               
      </div> 
-     <div className="form-group">
+     <div className="form-group ">
       <label htmlFor="topicId">Topic</label>
       <select  id="topicId" className="custom-select" 
        tabIndex={0}
@@ -345,23 +417,22 @@ render(){
       </select>               
      </div>
 
-     <div className="form-group">
-      <label htmlFor="complexityLavel">Complexity Level</label>
-      <select  id="complexityLavel" className="custom-select" 
-       tabIndex={0}
-       name="complexityLevel"
-       value={question.complexityLevel?question.complexityLevel:''}
-       onChange={(e)=>this.handleOnChange('complexityLevel',e.target.value)}        >
-       <option>Please select</option>
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-         
-      </select>               
+     <div className="form-group">  
+      <div className="container ml-5"> 
+       <div className="row">
+        <span className="filter-label">Complexity Level:</span>
+       </div>
+       <div className="row"> 
+        {complexityLevels}
+       </div>
+      </div>   
      </div>
+
+     <div className="form-group">
+      <label htmlFor="typeId" className="mr-2">Question type *</label>
+      {typeOptionHtml}  
+     </div>
+    
 
     </div>
     {/* Row 1 End */}
@@ -377,89 +448,142 @@ render(){
      </div>
     </div>   
     {/* Row 2 End */}
-    {/* Row 3 Start */}
-    <div className="form-row">
-     <div className="form-group">
-      <label htmlFor="typeId">Question type *</label>
-      <select  id="typeId" className="custom-select" tabIndex={0} autoFocus={false}
-       name="typeId"
-       value={question.typeId?question.typeId:''}
-       onChange={(e)=>this.handleOnChange('typeId',e.target.value)}
-      >
-       <option >Please select</option>
-       {typeOptionHtml}    
-      </select>        
-     </div>
-    </div>
-    {/* Row 3 End */}
-
+    
     {/* Question Options Start */}
-    <div className="form-row">
-     <div className="form-group  flex-grow-1">
-      <label className="mb-0" htmlFor="optionA">A *:</label>
-      <ErrorBoundary>
-       <RichTextEditor id="optionA" readOnly={false}
-        tabIndex={0} autoFocus={false}
-        value={question.optionA} 
-        onChange={this.onOptionADescChange}/>
-      </ErrorBoundary>
+    <div className="form-row justify-content-center">    
+     <div className="form-group option-box-size">
+      <div className="d-flex align-items-center">
+       <label className="mb-0" htmlFor="optionA">A *:</label>
+       <ErrorBoundary>
+        <RichTextEditor id="optionA" readOnly={false}
+         tabIndex={0} autoFocus={false}
+         value={question.optionA} 
+         onChange={this.onOptionADescChange}/>
+       </ErrorBoundary>
+      </div>
+      
+     </div>
+     <div className="form-group option-box-size ml-2">
+      <div className="d-flex align-items-center">
+       <label className="mb-0" htmlFor="optionB">B *:</label>
+       <ErrorBoundary>
+        <RichTextEditor id="optionB" readOnly={false}  
+         tabIndex={0} autoFocus={false}
+         value={question.optionB} onChange={this.onOptionBDescChange}/> 
+       </ErrorBoundary> 
+      </div>
+     </div>
+    </div>
+
+    <div className="form-row justify-content-center">
+     <div className="form-group  option-box-size">
+      <div className="d-flex align-items-center">
+       <label htmlFor="optionC">C *:</label>
+       <ErrorBoundary>
+        <RichTextEditor id="optionC" readOnly={false} 
+         tabIndex={0} autoFocus={false}
+         value={question.optionC} 
+         onChange={this.onOptionCDescChange}/> 
+       </ErrorBoundary>
+      </div>
+     </div>
+
+     <div className="form-group  option-box-size ml-2">
+      <div className="d-flex align-items-center">
+       <label htmlFor="optionD">D *:</label>
+       <ErrorBoundary>
+        <RichTextEditor id="optionD" readOnly={false} 
+         tabIndex={0} autoFocus={false}
+         value={question.optionD} 
+         onChange={this.onOptionDDescChange}/> 
+       </ErrorBoundary>
+      </div>
+     </div>
+    </div>
+
+
+    <div className="form-row"> 
+     <div className="form-group"> 
+      <label className="mb-0 mr-2" htmlFor="answerId">Correct Answer:</label>    
+      {Number(this.state.question.typeId) === SINGLE_CHOICE_QUESTION_TYPE_ID?<div>
+       <div className="form-check form-check-inline">
+        <input className="form-check-input" name="answer" type="radio" 
+         id="optionA" 
+         value="A"
+         checked={question.answer === 'A'}
+         onChange={(e)=>this.handleCorrectAnswerChange('A',e.target.checked,1)}
+        />
+        <label className="form-check-label"  htmlFor="optionA">A</label>
+       </div>
+       <div className="form-check form-check-inline">
+        <input className="form-check-input" name="answer" type="radio" 
+         id="optionB" 
+         value="B" 
+         checked={question.answer === 'B'}
+         onChange={(e)=>this.handleCorrectAnswerChange('B',e.target.checked,1)}
+        />
+        <label className="form-check-label" htmlFor="optionB">B</label>
+       </div>
+       <div className="form-check form-check-inline">
+        <input className="form-check-input" name="answer" 
+         type="radio" 
+         id="optionC" 
+         value="C" 
+         checked={question.answer === 'C'}
+         onChange={(e)=>this.handleCorrectAnswerChange('C',e.target.checked,1)}
+        />
+        <label className="form-check-label" htmlFor="optionC">C</label>
+       </div>
+       <div className="form-check form-check-inline">
+        <input className="form-check-input" name="answer" type="radio" 
+         id="optionD" 
+         value="D" 
+         checked={question.answer === 'D'}
+         onChange={(e)=>this.handleCorrectAnswerChange('D',e.target.checked,1)}
+        />
+        <label className="form-check-label" htmlFor="optionD">D</label>
+       </div>
+      </div>:<div>
+       <div className="form-check form-check-inline">
+        <input className="form-check-input" type="checkbox" id="optionA" 
+         value="A" 
+         checked={this.state.correctAnswers['A']?this.state.correctAnswers['A']:''}
+         onChange={(e)=>this.handleCorrectAnswerChange('A',e.target.value,2)}
+        />
+        <label className="form-check-label" htmlFor="optionA">A</label>
+       </div>
+       <div className="form-check form-check-inline">
+        <input className="form-check-input" type="checkbox" id="optionB" 
+         value="B" 
+         checked={this.state.correctAnswers['B']?this.state.correctAnswers['B']:''}
+         onChange={(e)=>this.handleCorrectAnswerChange('B',e.target.checked,2)}
+        />
+        <label className="form-check-label" htmlFor="optionB">B</label>
+       </div>
+       <div className="form-check form-check-inline">
+        <input className="form-check-input" type="checkbox" id="optionC" 
+         value="C" 
+         checked={this.state.correctAnswers['C']?this.state.correctAnswers['C']:''}
+         onChange={(e)=>this.handleCorrectAnswerChange('C',e.target.checked,2)}
+        />
+        <label className="form-check-label" htmlFor="optionC">C</label>
+       </div>
+       <div className="form-check form-check-inline">
+        <input className="form-check-input" type="checkbox" id="optionD" 
+         value="D" 
+         checked={this.state.correctAnswers['D']?this.state.correctAnswers['D']:''}
+         onChange={(e)=>this.handleCorrectAnswerChange('D',e.target.checked,2)}
+        />
+        <label className="form-check-label" htmlFor="optionD">D</label>
+       </div>
+      </div>}
+            
      </div>
     </div>
 
     <div className="form-row">
      <div className="form-group  flex-grow-1">
-      <label className="mb-0" htmlFor="optionB">B *:</label>
-      <ErrorBoundary>
-       <RichTextEditor id="optionB" readOnly={false}  
-        tabIndex={0} autoFocus={false}
-        value={question.optionB} onChange={this.onOptionBDescChange}/> 
-      </ErrorBoundary> 
-     </div>
-    </div>
-
-    <div className="form-row">
-     <div className="form-group  flex-grow-1">
-      <label className="mb-0 " htmlFor="optionC">C *:</label>
-      <ErrorBoundary>
-       <RichTextEditor id="optionC" readOnly={false} 
-        tabIndex={0} autoFocus={false}
-        value={question.optionC} 
-        onChange={this.onOptionCDescChange}/> 
-      </ErrorBoundary>
-     </div>
-    </div>
-
-    <div className="form-row">
-     <div className="form-group  flex-grow-1">
-      <label className="mb-0" htmlFor="optionD">D *:</label>
-      <ErrorBoundary>
-       <RichTextEditor id="optionD" readOnly={false} 
-        tabIndex={0} autoFocus={false}
-        value={question.optionD} 
-        onChange={this.onOptionDDescChange}/> 
-      </ErrorBoundary>
-     </div>
-    </div>
-
-    <div className="form-row">
-     <div className="form-group">
-      <label className="mb-0" htmlFor="answerId">Correct Answer:</label>
-      <select id="answerId" className="custom-select"
-       value={this.state.question.answer?this.state.question.answer:''}
-       onChange={(e)=>this.handleOnChange('answer',e.target.value)}
-      >
-       <option >Please select</option>
-       <option value="A">A</option>
-       <option value="B">B</option>
-       <option value="C">C</option>
-       <option value="D">D</option>
-      </select>
-     </div>
-    </div>
-
-    <div className="form-row">
-     <div className="form-group  flex-grow-1">
-      <label className="mb-0" htmlFor="explanationId">Answer Explanation:</label>
+      <label className="mb-0" htmlFor="explanationId">Explanation:</label>
       <ErrorBoundary>
        <RichTextEditor id="explanationId" readOnly={false} 
         tabIndex={0} autoFocus={false}
@@ -469,8 +593,19 @@ render(){
      </div>
     </div>
 
+    <div className="form-row justify-content-center">
+     <div className="form-group w-50">
+      <label htmlFor="noteId">Additional Note:</label>
+      <textarea id="noteId" name="questionNote"
+       className="form-control"
+       value={question.note?question.note:''}
+       onChange={(e)=>this.handleOnChange('note',e.target.value)}
+      />
+     </div>
+    </div>
+
     {/* Question Options End */}
-    {questionsTags}
+    {/*  {questionsTags}
 
     <div className="form-row">
      <div className="col-3"> 
@@ -478,7 +613,7 @@ render(){
        onClick={this.handleAddTag}
       >Add New Tag</button>
      </div>
-    </div>
+    </div> */}
 
     <div className="form-row  mt-1">
      <div className="col-1">

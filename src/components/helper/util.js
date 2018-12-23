@@ -1,4 +1,7 @@
-import * as _ from 'underscore';
+import * as _ from 'lodash';
+import {COMPLEXITY_LEVELS} from '../../constants/system-constant';
+
+
 /* 
 This function will filter out question based on filters
 */
@@ -28,4 +31,9 @@ export let applyFilters = (questions, filters)=>{
   });
  }
  return filteredQuestions;
+};
+
+export let getComplexityLevel = (id)=>{
+ let level = _.find(COMPLEXITY_LEVELS, c => Number(c.id) === Number(id));
+ return level? level.name :'N/A';
 };

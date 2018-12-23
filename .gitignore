@@ -10,6 +10,8 @@
 /build
 
 # misc
+/.sass-cache
+/.vscode
 .DS_Store
 .env.local
 .env.development.local

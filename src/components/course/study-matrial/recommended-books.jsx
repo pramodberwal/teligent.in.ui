@@ -9,7 +9,7 @@ let BookSummary = (props) =>{
   <div className="row justify-content-center">
    <div className="text-center">
     <div className="book-image-box">
-     <img src="/static/images/hcverma.jpg" class="img-rounded" alt="Cinque Terre"></img>
+     <img src="/static/images/hcverma.jpg" className="img-rounded" alt="Cinque Terre"></img>
     </div>
    </div>
    <div className="flex-grow-1">
@@ -55,13 +55,26 @@ export default class RecommendedBooksComponent extends React.Component{
         this.state.recommendedBooks.map((book , index )=>{
          return <div key={index} className="paper-box book-box" 
           data-toggle="modal" data-target={'#book_'+index}>
-          <img src="/static/images/hcverma.jpg" class="img-rounded" alt="Cinque Terre"></img>
+          <img src="/static/images/hcverma.jpg" className="img-rounded" alt="Cinque Terre"></img>
           <div><span className="text-style">{book.title}</span></div>
           <div><span className="text-style">{book.subjectName}</span></div> 
           <PopUpModel id={'book_'+index} title={book.title} Component={()=><BookSummary book={book}/>}/>
          </div>;
         })
         :''}
+      </div>
+      <div className="row">
+       <div>
+        <iframe 
+         className="external-book-box"
+         title="HC Verma Book"
+         marginWidth="0" 
+         marginHeight="0" 
+         scrolling="no" 
+         frameBorder="0" 
+         src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ss&ref=as_ss_li_til&ad_type=product_link&tracking_id=teligent-21&language=en_IN&marketplace=amazon&region=IN&placement=8177091875&asins=8177091875&linkId=7916d787a32741744d1d830240abfd90&show_border=true&link_opens_in_new_window=true"></iframe>
+       </div>
+     
       </div>
      </div>;
     }

@@ -1,12 +1,11 @@
 import { getChapterById } from "../../../services/ref-data/chapter";
 import { getSubjectById } from "../../../services/ref-data/subject";
-import { getTestSeriseByChapter } from "../../../services/test-series";
+import { getTestsByChapter } from "../../../services/exam-test";
 
 
 export let loadData =(props,component) =>{
  getSubjectById(props.subjectId)
   .then(data =>{
-    //console.log('component in chapter ',component.isMounted());
    component.setState({subject:data.subject});
   }).catch(data=>{
    component.setState({subject:''});
@@ -17,10 +16,10 @@ export let loadData =(props,component) =>{
   }).catch(data=>{
    component.setState({chapter:''});
   });
- getTestSeriseByChapter(props.chapterId)
+  getTestsByChapter(props.chapterId)
   .then(data =>{
-   component.setState({testSeriesList:data.testSeriesList});
+   component.setState({testList:data.testList});
   }).catch(data=>{
-   component.setState({testSeriesList:[]});
+   component.setState({testList:[]});
   });
 };

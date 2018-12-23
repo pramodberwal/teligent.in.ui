@@ -1,8 +1,8 @@
 .question-panel-container{
-    .test-series-heading-row{
+    .test-heading-row{
         padding-top: 20px;
        // border: 1px solid red;
-        .test-series-heading-text{
+        .test-heading-text{
             text-align: center;
         }
     }
@@ -13,11 +13,25 @@
         padding:10px 10px; 
         padding-right: 0px;
 
+        .legend-col{
+            margin-top:5px;           
+            margin-bottom: 5px;
+            .need-review{
+                padding:5px 5px; 
+             }
+             .question-btn-attempted{
+                padding:5px 5px; 
+             }
+             .not-attempted{
+                padding:5px 5px; 
+             }
+        }
         .question-btn{
             padding:0px 10px;
             margin: 5px;
             border: none;
             background-color: rgb(200, 212, 200);
+            
             cursor: pointer;
             a{               
                 padding:5px;
@@ -25,11 +39,16 @@
         }
         .not-attempted{
             background-color: rgb(200, 212, 200);
+          
+            border-radius:5px; 
+            color: rgba(255, 255, 255, 0.85);
            
         }
         .question-btn-attempted{
            background-color: green;
-           color:white;
+           
+           border-radius:5px; 
+            color: rgba(255, 255, 255, 0.85);
            a{
                color:white;
            }
@@ -38,8 +57,18 @@
         .active{
             background-color: rgb(238, 223, 20);
         }
+        .question-active{
+            background-color: rgb(238, 223, 20);
+          
+            border-radius:5px; 
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 20px;
+        }
         .need-review{
             background-color: red;
+          
+            border-radius:5px; 
+            color: rgba(255, 255, 255, 0.85);
             a{
                 color:white;
             }

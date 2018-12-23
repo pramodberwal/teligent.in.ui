@@ -56,7 +56,7 @@
     margin-left: 0;
     width: 100%; }
 @media only screen and (max-width: 767px) {
-  .subject-home-container .subject-test-series-table .desktop-heading {
+  .subject-home-container .subject-test-table .desktop-heading {
     display: none; } }
 
 /*# sourceMappingURL=style.css.map */

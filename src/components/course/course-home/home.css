@@ -23,7 +23,8 @@
     border: 1px solid black;
     padding: 20px;
     margin: 20px;
-    background: blue; }
+    color: #655745;
+    background: #eaeaea; }
     .default-course-home-container .course-options-item-row .course-options-item-col .course-options-text {
       cursor: pointer;
       font-family: "Open Sans",sans-serif;
@@ -31,6 +32,9 @@
       box-sizing: border-box;
       text-transform: capitalize;
       font-size: 24px;
-      padding: 20px; }
+      padding: 20px;
+      color: #007bff; }
+    .default-course-home-container .course-options-item-row .course-options-item-col .course-options-text:hover {
+      text-decoration: underline; }
 
 /*# sourceMappingURL=home.css.map */

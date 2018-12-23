@@ -1,5 +1,6 @@
 import React from 'react';
 import * as _ from 'lodash';
+import {Link} from 'react-router-dom';
 import './home.css';
 
 
@@ -22,10 +23,7 @@ export default class DefaultHomeComponent extends React.Component{
       this.props.history.push(`${this.props.match.url}/subject/`+subject.id);
      }
     }
-    onEBook = ()=>{
-     this.props.history.push('/e-library/recommended-books');
-    }
-
+   
     render(){
      if(this.props.course){
       return <div className="container-fluid default-course-home-container">
@@ -40,18 +38,24 @@ export default class DefaultHomeComponent extends React.Component{
         </div>
        </div> 
        <div className="row course-options-item-row">
-        <div className=" course-options-item-col ">
-         <span className="course-options-text" onClick={this.onChapterwiseQuizes}>      
-        Chapterwise Quizes?
+        <div className=" course-options-item-col ">          
+         <span className="course-options-text" 
+          onClick={this.onChapterwiseQuizes}>      
+        Subject/Chapter Quizes (Online)
          </span>
+       
         </div>
         <div className=" course-options-item-col ">
-         <span className="course-options-text">Jee-Main Mock Test (On-Line)</span>
+         <Link to={`${this.props.match.url}/exam-home`} >
+          <span className="course-options-text">{this.props.course.name} Exam (Online)</span>
+         </Link>
         </div>
        </div> 
        <div className="row course-options-item-row">
         <div className="course-options-item-col">
-         <span className="course-options-text" onClick={this.onEBook}>Want to read e-book?</span>
+         <Link to="/e-library/recommended-books">
+          <span className="course-options-text" >Want to read e-book?</span>
+         </Link>
         </div>
         <div className=" course-options-item-col">
          <span className="course-options-text">Want to watch recorded lectures?</span>

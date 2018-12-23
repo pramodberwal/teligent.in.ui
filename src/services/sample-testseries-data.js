@@ -1,4 +1,4 @@
-export let TEST_SERIES_STORE=[{
+export let TEST_STORE=[{
  id:1,
  name:'TEST1',
  desc:'To test you fundamental skils, try this test',

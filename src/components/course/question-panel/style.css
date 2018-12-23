@@ -1,12 +1,21 @@
-.question-panel-container .test-series-heading-row {
+.question-panel-container .test-heading-row {
   padding-top: 20px; }
-  .question-panel-container .test-series-heading-row .test-series-heading-text {
+  .question-panel-container .test-heading-row .test-heading-text {
     text-align: center; }
 .question-panel-container .questions-navigator-col {
   border: 1px solid black;
   margin-right: 10px;
   padding: 10px 10px;
   padding-right: 0px; }
+  .question-panel-container .questions-navigator-col .legend-col {
+    margin-top: 5px;
+    margin-bottom: 5px; }
+    .question-panel-container .questions-navigator-col .legend-col .need-review {
+      padding: 5px 5px; }
+    .question-panel-container .questions-navigator-col .legend-col .question-btn-attempted {
+      padding: 5px 5px; }
+    .question-panel-container .questions-navigator-col .legend-col .not-attempted {
+      padding: 5px 5px; }
   .question-panel-container .questions-navigator-col .question-btn {
     padding: 0px 10px;
     margin: 5px;
@@ -16,16 +25,26 @@
     .question-panel-container .questions-navigator-col .question-btn a {
       padding: 5px; }
   .question-panel-container .questions-navigator-col .not-attempted {
-    background-color: #c8d4c8; }
+    background-color: #c8d4c8;
+    border-radius: 5px;
+    color: rgba(255, 255, 255, 0.85); }
   .question-panel-container .questions-navigator-col .question-btn-attempted {
     background-color: green;
-    color: white; }
+    border-radius: 5px;
+    color: rgba(255, 255, 255, 0.85); }
     .question-panel-container .questions-navigator-col .question-btn-attempted a {
       color: white; }
   .question-panel-container .questions-navigator-col .active {
     background-color: #eedf14; }
+  .question-panel-container .questions-navigator-col .question-active {
+    background-color: #eedf14;
+    border-radius: 5px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 20px; }
   .question-panel-container .questions-navigator-col .need-review {
-    background-color: red; }
+    background-color: red;
+    border-radius: 5px;
+    color: rgba(255, 255, 255, 0.85); }
     .question-panel-container .questions-navigator-col .need-review a {
       color: white; }
 .question-panel-container .question-description-row .question-seq {

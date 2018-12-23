@@ -6,6 +6,8 @@
     .question-editor-container .question-editor-heading-row .question-editor-heading {
       text-align: center;
       flex-grow: 1; }
+  .question-editor-container .option-box-size {
+    width: 49%; }
   .question-editor-container .invalid-field {
     width: 100%;
     margin-top: 0.25rem;

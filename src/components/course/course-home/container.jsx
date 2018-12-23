@@ -2,6 +2,7 @@ import React from 'react';
 import {withRouter,Switch,Route,Redirect} from 'react-router-dom';
 import CourseHomeComponent from './component';
 import {isUserAuthenticated} from '../../../utils/autherization';
+import ExamHome from '../exam-home/container';
 
 class CourseHomeContainer extends React.Component{
  render(){
@@ -28,7 +29,11 @@ class CourseHomeContainer extends React.Component{
        resource='subject'
        {...this.props}/> }
     />
-   
+    <Route path={`${this.props.match.url}/exam-home`} 
+     render = {(props)=>
+      <ExamHome
+       {...this.props}/> }
+    />     
    </Switch>
   );
  }

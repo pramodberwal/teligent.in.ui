@@ -11,15 +11,15 @@ state={
  message:'',
  courses:[],
 }
-    componentWillMount = ()=>[
+    componentWillMount = ()=>{
      getAllPublicCourses()
       .then(data =>{
        this.setState({courses:data.courses});
       })
       .catch(data =>{
        this.setState({message:data.message});
-      })
-    ]
+      });
+    }
     render() {
      return (
       <div className=" user-home-container flex-grow-1">

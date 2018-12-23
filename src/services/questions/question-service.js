@@ -45,8 +45,9 @@ export let getAllFiltred =(filter, pageNumber) =>{
    pageNumber = 0;
   }
 
-  instance.post("/question/filter?page="+pageNumber, filter )
+  instance.post("/question/filter?page="+pageNumber, JSON.stringify(filter) )
    .then(resp =>{
+   
     QUESTION_STORE = resp.data.content;
     let pagable=resp.data.pageable;
     pagable.totalPages = resp.data.totalPages;
@@ -62,7 +63,8 @@ export let getAllFiltred =(filter, pageNumber) =>{
    })
    .catch(error =>{
     console.log(error);
-    reject({message:'Error while fetching all filtered question!'});
+    let message = error && error.response && error.response.data ? JSON.stringify(error.response.data):JSON.stringify(error.response);
+    reject({message:'Error while fetching all filtered question!'+message});
    });
 
  });
@@ -158,8 +160,7 @@ export let getQuestionById = (questionId)=>{
 };
 export let getQuestionForSubject = (subjectId)=>{
  let promise = new Promise((resolve,reject)=>{
-  let matchedQuestions = _.filter(question => question.subject === subjectId);
-  resolve({questions:matchedQuestions});
+  
  });
  return promise;
 };

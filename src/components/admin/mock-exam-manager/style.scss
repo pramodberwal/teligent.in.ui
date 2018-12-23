@@ -1,0 +1,24 @@
+@import '../../style-vars.scss';
+
+.mock-paper-manager-container{
+    .heading-row{
+        margin-left: 30px;
+    }
+    .mock-paper-manager-table{
+        .mobile-heading{
+            display:none;
+        }
+    }
+    @media only screen and (max-width:$mobile-break-point) {
+        .mock-paper-manager-table{
+            .desktop-heading{
+                display:none;
+            }
+            .mobile-heading{
+                display:block;
+            }
+        }
+    }
+    
+
+}

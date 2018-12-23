@@ -1,4 +1,5 @@
 import React from 'react';
+import * as _ from 'lodash';
 import {Link} from 'react-router-dom';
 import * as $ from 'jquery';
 import {getAll, getAllFiltred, deleteQuestion} from '../../../services/questions/question-service';
@@ -7,6 +8,7 @@ import {getChaptersBySubject, getAllChapters} from '../../../services/ref-data/c
 import {getTopicsByChapter} from '../../../services/ref-data/topic';
 import {QuestionManagerTableHeader,QuestionManagerTableBodyRow} from './question-manager-table-row';
 import './style.css';
+import {COMPLEXITY_LEVELS} from '../../../constants/system-constant';
 
 
 export default class QuestionManagerComponent extends React.Component{
@@ -14,18 +16,14 @@ state = {
  isError:false,
  message:'Please wait while we are loading data...',
  pagable:'', 
- filter:{
-  subjectId:'',
-  chapterId:'',
-  topicId:'',
-  fromComplexityLevel:'',
-  toComplexityLevel:'',
- },
+ filter:{}, 
+ checkedComplexities:{},
  subjects:[],  
  chapters:[],  
  topics:[],  
  questions:[],
  page:1,
+ questionCount:0,
 };
 
 componentDidMount =()=>{
@@ -38,7 +36,6 @@ componentDidMount =()=>{
   if(Number.isNaN(page)){
    page = 0;
   }
-
   let filter = $.cookie('questions_manager_filter');
   if( filter ){
    filter = JSON.parse(filter);
@@ -61,25 +58,46 @@ componentDidMount =()=>{
   }
   getAll(page).then( data =>{
    getAllSubjects()
-    .then(subjectData =>{
+    .then(subjectData =>{      
      this.setState({
       page:page,
       message:'',
       questions:data.questions,
       subjects:subjectData.subjects,
-      pagable:data.pagable
+      pagable:data.pagable,
+      questionCount:data.pagable.totalElements
      });
     })
     .catch(error =>{
      this.setState({isError:true, message:error.message,
       page:page,
       questions:data.questions,
+      questionCount:data.pagable.totalElements,
       pagable:data.pagable});
     });    
   
   }).catch(error =>{
    this.setState({isError:true, message:error.message});
   });
+ }
+
+ componentWillUnmount =()=>{
+  this.setState({question:[]});
+ }
+
+ onQuestionComplexityChange =(selected, level)=>{
+  let questionFilter = this.state.filter||{};
+  let complexitiesSelected = questionFilter.complexitiesSelected || [];
+  let checkedComplexities = this.state.checkedComplexities;
+  checkedComplexities[level]= selected;
+  if(selected){
+   complexitiesSelected.push(level);
+  }else if(Array.isArray(complexitiesSelected)){
+   _.remove(complexitiesSelected, l => Number(l) === Number(level));
+  }
+  questionFilter['complexitiesSelected']=complexitiesSelected;
+ 
+  this.setState({filter:questionFilter,checkedComplexities:checkedComplexities});
  }
 
 onFilterChange = (field, value)=>{
@@ -108,13 +126,16 @@ onSubjectFilterChange = (subjectId)=>{
   
 };
 
-onClearFilter = ()=>{
- $.cookie('questions_manager_filter','', { expires:0,
-  secure:false});
- this.setState({filter:''});
+onClearFilter = ()=>{ 
+ $.cookie('questions_manager_filter','',
+  {path:'/', 
+   expires:0,
+   secure:false}
+ );
+ this.setState({filter:{},checkedComplexities:{}});
 }
 
-applyFilter = (filter)=>{ 
+applyFilter = (filter)=>{
  if(!filter){
   filter = this.state.filter;
  }
@@ -127,13 +148,19 @@ applyFilter = (filter)=>{
        message:'',
        questions:questionData.questions,
        subjects:subjectData.subjects,
-       pagable:questionData.pagable
+       pagable:questionData.pagable,
+       questionCount:questionData.pagable.totalElements
       });
-      $.cookie('questions_manager_filter', JSON.stringify(filter));
+      $.cookie('questions_manager_filter', JSON.stringify(filter),{
+       path:'/',
+       //  domain:'localhost',
+       secure:false
+      });
      })
      .catch(error =>{
       this.setState({isError:true, message:error.message,
        questions:questionData.questions,
+       questionCount:questionData.pagable.totalElements,
        pagable:questionData.pagable});
      });
    })
@@ -170,9 +197,10 @@ applyFilter = (filter)=>{
 
  onDeleteQuestion = (questionId)=>{
   deleteQuestion(questionId)
-   .then(data =>{
-    this.setState({isError:false,message:data.message});
-    this.componentDidMount();
+   .then(data =>{ 
+    let questions =   this.state.questions;  
+    _.remove(questions, q => Number(q.id) === Number(questionId));
+    this.setState({isError:false,message:data.message,questions:questions});    
    })
    .catch(error =>{
     this.setState({isError:true,message:error.message});
@@ -187,9 +215,12 @@ applyFilter = (filter)=>{
  render(){
   let {questions,pagable} = this.state;
    
-  let PageLinks = (props) =>{   
+  let PageLinks = (props) =>{
+   let startPage = (props.pagable.pageNumber - 3) >= 0?(props.pagable.pageNumber - 3):0;
+   let endPage = (props.pagable.pageNumber + 3) <= props.pagable.totalPages ?(props.pagable.pageNumber + 3):props.pagable.totalPages;
+     
    let children = [];
-   for (let j = 0; j < props.pagable.totalPages; j++) {
+   for (let j = startPage; j < endPage; j++) {
     children.push(
      <li key={j} className={"page-item "+ (Number(props.page) === Number(j) ? ' active ':'')}>
       <Link className="page-link" to={`${props.match.url}/`+j}>{j}</Link>
@@ -199,6 +230,17 @@ applyFilter = (filter)=>{
    return  children;
   };
 
+  let complexityLevels = COMPLEXITY_LEVELS.map((level,index)=>{
+   return  <div key={index} className="flex-grow-1"> 
+    <input className="form-check-input  " type="checkbox"
+     checked={this.state.checkedComplexities && this.state.checkedComplexities[level.id]?this.state.checkedComplexities[level.id]:false} 
+     onChange={(e) =>this.onQuestionComplexityChange(e.target.checked,level.id)}
+     value={level.id} id="defaultCheck1" />
+    <label className="form-check-label " htmlFor="defaultCheck1">
+     {level.name}
+    </label>
+   </div>; 
+  });
   
 
   if(!Array.isArray(questions)){
@@ -263,44 +305,16 @@ applyFilter = (filter)=>{
      </span>
     </div>
 
-    <div className="filter-col">
-     <span className="filter-label">Complexity From:</span>
-     <span className="filter-value">
-      <select className="custom-select"
-       name="fromComplexityLevel"
-       value={this.state.filter.fromComplexityLevel?this.state.filter.fromComplexityLevel:''}
-       onChange={(e) =>this.onFilterChange('fromComplexityLevel',e.target.value)}
-      >
-       <option>Please select</option>
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>       
-      </select>
-     </span>
+    <div className="filter-col flex-grow-1">      
+     <div className="container"> 
+      <div className="row">
+       <span className="filter-label">Complexity Level:</span>
+      </div>
+      <div className="row"> 
+       {complexityLevels}     
+      </div>
+     </div>
     </div>
-
-    <div className="filter-col">
-     <span className="filter-label">Complexity To:</span>
-     <span className="filter-value">
-      <select className="custom-select"
-       name="toComplexityLevel"
-       value={this.state.filter.toComplexityLevel?this.state.filter.toComplexityLevel:''}
-       onChange={(e) =>this.onFilterChange('toComplexityLevel',e.target.value)}
-      >
-       <option>Please select</option>
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>       
-      </select>
-     </span>
-    </div>
-
    </div>
    <div className="row">
     <div className="flex-grow-1"> 
@@ -326,7 +340,7 @@ applyFilter = (filter)=>{
      </div> 
      <div> 
       <span>Questions:</span>
-      <span className="ml-2 font-weight-bold">{this.state.pagable.totalElements}</span>
+      <span className="ml-2 font-weight-bold">{this.state.questionCount}</span>
      </div> 
     </div>
      

@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import * as $ from 'jquery';
+import * as CookieService from 'jquery.cookie';
 import {getHttpInstance} from '../services/httputil';
 import {ACCOUNT_SERVICE_BASE_URL} from '../constants/system-constant';
 
@@ -77,7 +78,6 @@ export let doLogin = (username, password)=>{
   )
    .then(resp =>{   
     userSession = resp.data;
-    console.log('userSession data ',userSession);
     $.cookie('userSession',JSON.stringify(userSession),
      {
       path:'/',

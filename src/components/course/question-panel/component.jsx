@@ -4,7 +4,7 @@ import moment from 'moment';
 import RichTextEditor from '../../admin/rich-text-editor/container';
 import {Value} from 'slate';
 import './style.css';
-import {loadTestSeries} from './helper';
+import SingleSelectOptions from './single-select-options';
 /* window.oncontextmenu =(e)=>{
  console.log('oncontextmenu ',e);
  e.preventDefault();
@@ -13,9 +13,8 @@ import {loadTestSeries} from './helper';
 export default class QuestionPanelComponent extends React.Component{
     state={
      currentQuestionIndex:0,
-     testSeries:'', 
      questions:'',    
-     attemptedQuestions:this.props.attemptedQuestions,
+     attemptedQuestions:{},
      needReviewQuestions:{},
      activeQuestion:'',
      isPreviousDisabled:true,
@@ -29,18 +28,31 @@ export default class QuestionPanelComponent extends React.Component{
      window.onkeydown  = (e) => {     
      };
     }
-    componentDidMount=()=>{      
-     let questions = this.props.questions;
-     let isPreviousDisabled = true;
-     let isNextDisabled = true;
-     let currentQuestionIndex = 0;
-     if(!Array.isArray(questions)){
+
+    componentWillReceiveProps =(props)=>{
+     if(props.questionPanelState){
+      this.setState(props.questionPanelState);
       return;
      }
 
+
+     let questions = props.questions;
+     let isPreviousDisabled = true;
+     let isNextDisabled = true;
+     let currentQuestionIndex = props.currentQuestionIndex?props.currentQuestionIndex:0;
+
+     if(!Array.isArray(questions)){
+      return;
+     }
+    
      if(questions.length > 1){
       isNextDisabled = false;
      }
+
+     if(questions.length <= currentQuestionIndex){
+      isNextDisabled = true;
+     }
+
      window.oncontextmenu =(e)=>{
       e.preventDefault();
      };
@@ -49,24 +61,35 @@ export default class QuestionPanelComponent extends React.Component{
        e.preventDefault(); 
       }   
      };
+
+
      this.setState({
+      attemptedQuestions:props.attemptedQuestions,
       currentQuestionIndex:currentQuestionIndex,
       isNextDisabled:isNextDisabled,
       isPreviousDisabled:isPreviousDisabled,
       questions:questions,
       activeQuestion:questions[currentQuestionIndex],
      });
+    }
+
+    componentDidMount=()=>{      
+     this.componentWillReceiveProps(this.props);
     };
 
     onOptionSelect = (value)=>{     
+     
      let attemptedQuestions = this.state.attemptedQuestions;
      let needReviewQuestions = this.state.needReviewQuestions;
+     
      attemptedQuestions[this.state.activeQuestion.id] = value;
-     this.props.onOptionSelect(attemptedQuestions);
+     
      needReviewQuestions[this.state.activeQuestion.id]=false;
-     this.setState({
-      needReviewQuestions:needReviewQuestions,
-      attemptedQuestions:attemptedQuestions});
+     
+     let newState = this.state;
+     newState['needReviewQuestions'] = needReviewQuestions;
+     newState['attemptedQuestions'] = attemptedQuestions;
+     this.props.onOptionSelect(newState);
     }
 
     onSkipQuestion = ()=>{
@@ -190,10 +213,9 @@ render(){
      <div className="questions-navigator-col col-lg-2">
       <div className="container-fluid">
        <div className="row">
-        <div className="flex-grow-1"><span className="need-review pl-2 pr-2">Need Review</span></div>
-        <div className="flex-grow-1"><span className="question-btn-attempted pl-2 pr-2">Done</span></div>
-        <div className="flex-grow-1"><span className="active pl-2 pr-2">Current Question</span></div>
-        <div  className="flex-grow-1"><span className="not-attempted pl-2 pr-2">Question not Attempted</span></div>
+        <div className="flex-grow-1 legend-col"><span className="need-review shadow rounded">Review</span></div>
+        <div className="flex-grow-1 legend-col"><span className="question-btn-attempted pl-2 pr-2">Done</span></div>
+        <div  className="flex-grow-1 legend-col"><span className="not-attempted pl-2 pr-2">Skipped</span></div>
        </div>
        <div className="row justify-content-center">
         {Array.isArray(this.state.questions)?
@@ -202,8 +224,8 @@ render(){
            <button type="button"
             onClick={()=>this.onQuestionIdClick(index)}
             className={"question-btn "+
-            ( this.state.needReviewQuestions[question.id]?' need-review '
-             :this.state.attemptedQuestions[question.id]?' question-btn-attempted ':'' ) 
+            ((this.state.needReviewQuestions && this.state.needReviewQuestions[question.id])?' need-review '
+             :(this.state.needReviewQuestions && this.state.attemptedQuestions[question.id])?' question-btn-attempted ':'' ) 
             }>{index + 1}</button>
           </div>  ;
          })
@@ -225,71 +247,12 @@ render(){
            value={Value.fromJSON(JSON.parse(this.state.activeQuestion.desc))} />
          </div>
         </div>
-        <div className="question-option-row row">
-         <div className="option-name">A:</div>
-         <div className="option-value">
-          <input type="radio" 
-           name={this.state.activeQuestion.id} 
-           value="A" 
-           checked={this.state.attemptedQuestions[this.state.activeQuestion.id] === 'A'}
-           onChange={(e) =>this.onOptionSelect(e.target.value)}/>
-         </div>
-         <div className="option-description">
-          <RichTextEditor 
-           id="A" 
-           readOnly={true} 
-           value={Value.fromJSON(JSON.parse(this.state.activeQuestion.optionA))} />
-         </div>
-        </div>
-
-        <div className="question-option-row row">
-         <div className="option-name">B:</div>
-         <div className="option-value">
-          <input type="radio" 
-           name={this.state.activeQuestion.id} 
-           value="B" 
-           checked={this.state.attemptedQuestions[this.state.activeQuestion.id] === 'B'}
-           onChange={(e) =>this.onOptionSelect(e.target.value)}/>
-         </div>
-         <div className="option-description">
-          <RichTextEditor 
-           id="B" 
-           readOnly={true} 
-           value={Value.fromJSON(JSON.parse(this.state.activeQuestion.optionB))} />
-         </div>
-        </div>
-
-        <div className="question-option-row row">
-         <div className="option-name">C:</div>
-         <div className="option-value">
-          <input type="radio" 
-           name={this.state.activeQuestion.id} 
-           value="C" 
-           checked={this.state.attemptedQuestions[this.state.activeQuestion.id] === 'C'}
-           onChange={(e) =>this.onOptionSelect(e.target.value)}/>
-         </div>
-         <div className="option-description">
-          <RichTextEditor 
-           id="C" 
-           readOnly={true} 
-           value={Value.fromJSON(JSON.parse(this.state.activeQuestion.optionC))} />
-         </div>
-        </div>
-        <div className="question-option-row row">
-         <div className="option-name">D:</div>
-         <div className="option-value">
-          <input type="radio" 
-           name={this.state.activeQuestion.id} 
-           value="D" 
-           checked={this.state.attemptedQuestions[this.state.activeQuestion.id] === 'D'}
-           onChange={(e) =>this.onOptionSelect(e.target.value)}/>
-         </div>
-         <div className="option-description">
-          <RichTextEditor 
-           id="D" 
-           readOnly={true} 
-           value={Value.fromJSON(JSON.parse(this.state.activeQuestion.optionD))} />
-         </div>
+        <div className="row question-options-row">
+         <SingleSelectOptions 
+          activeQuestion={this.state.activeQuestion}
+          attemptedQuestions={this.state.attemptedQuestions}
+          onOptionSelect={this.onOptionSelect}
+         />
         </div>
 
         <div className="question-panel-action-row row">
@@ -304,8 +267,8 @@ render(){
            onClick={this.onSkipQuestion}> Skip </button> 
           <button  type="button" 
            className="btn btn-primary skip-btn" 
-           onClick={this.onNeedReview}> Need Review </button>   
-          {this.state.needReviewQuestions[this.state.activeQuestion.id]?<button  type="button" 
+           onClick={this.onNeedReview}> Review Later </button>   
+          {this.state.attemptedQuestions && this.state.needReviewQuestions[this.state.activeQuestion.id]?<button  type="button" 
            className="btn btn-primary skip-btn" 
            onClick={this.onReviewed}> Reviewed </button> :''}
           <button type="button"
@@ -322,7 +285,7 @@ render(){
    </div>
   );
  }else{
-  return (<div className="question-panel-container">Question notfound</div>);
+  return (<div className="question-panel-container mx-auto">Questions not added?</div>);
  }
 }
 }

@@ -1,0 +1,9 @@
+.test-result-container .heading-row {
+  text-align: center;
+  padding: 10px; }
+  .test-result-container .heading-row .heading-text {
+    text-transform: uppercase; }
+.test-result-container .score-container .score-container-chart-col {
+  width: 50%; }
+
+/*# sourceMappingURL=style.css.map */

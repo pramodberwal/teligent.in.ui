@@ -1,11 +1,10 @@
 import React from 'react';
 import * as _ from 'lodash';
 import {RESOURCE_DOWNLOAD_SERVICE_ENDPOINT} from '../../../constants/system-constant';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {ChapterTestSeriesTable} from './chapter-test-series-table';
+import {ChapterTestTable} from './chapter-test-table';
 import RichTextEditor from '../../admin/rich-text-editor/container';
-import { getTestSeriseByChapter } from "../../../services/test-series";
-import { getChapterById } from "../../../services/ref-data/chapter";
+import { getTestsByChapter } from '../../../services/exam-test';
+import { getChapterById } from '../../../services/ref-data/chapter';
 import { Value } from 'slate';
 import {getResources} from '../../../services/ref-data/resource';
 import './style.css';
@@ -18,7 +17,7 @@ export default class ChapterHomeComponent extends React.Component{
      subject:'',
      chapter:'',
      topicIndexOpen:false,
-     testSeriesList:[]
+     testList:[]
     };
    onTopicIndexClick = ()=>{
     this.setState({topicIndexOpen:!this.state.topicIndexOpen});
@@ -56,14 +55,14 @@ export default class ChapterHomeComponent extends React.Component{
         this.setState({isError:true, message:'Error while loading chapter detail.'});
        });
      } 
-     getTestSeriseByChapter(props.chapterId)
+     getTestsByChapter(props.chapterId)
       .then(data =>{
        this.setState({
         isError:false,
         message:'', 
-        testSeriesList:data.testSeriesList});
+        testList:data.testList});
       }).catch(data=>{
-       this.setState({testSeriesList:[]});
+       this.setState({testList:[]});
       });   
     }
 
@@ -101,9 +100,9 @@ export default class ChapterHomeComponent extends React.Component{
           <RichTextEditor readOnly={true}
            value={Value.fromJSON(JSON.parse(this.state.chapter.summary))}/>:'No summary'}
         </div>       
-        <div className="chapter-test-series-table">
-         <ChapterTestSeriesTable 
-          testSeriesList={this.state.testSeriesList}
+        <div className="chapter-test-table">
+         <ChapterTestTable 
+          testList={this.state.testList}
           {...this.props}/>
         </div>
        </div>

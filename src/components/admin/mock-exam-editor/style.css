@@ -1,0 +1,94 @@
+.mock-exam-container .number-box-10 {
+  width: 15%; }
+.mock-exam-container .number-box-20 {
+  width: 20%; }
+.mock-exam-container .subject-name {
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-family: "Open Sans",sans-serif;
+  text-transform: capitalize;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  position: relative;
+  padding: inherit;
+  border-radius: 24px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-sizing: border-box;
+  background-color: #c74e17;
+  border-radius: 24px; }
+  .mock-exam-container .subject-name.active {
+    background-color: #401603; }
+.mock-exam-container .course-subject-row {
+  background: antiquewhite;
+  padding: 10px; }
+  .mock-exam-container .course-subject-row .subject-name-btn {
+    border: none;
+    color: inherit;
+    background: inherit;
+    cursor: pointer; }
+  .mock-exam-container .course-subject-row .subject-name-btn:focus {
+    border: none;
+    outline: none; }
+.mock-exam-container .mock-exam-heading-row {
+  margin-left: 30px; }
+  .mock-exam-container .mock-exam-heading-row .mock-exam-heading {
+    flex-grow: 1;
+    text-align: center; }
+.mock-exam-container .mock-editor-form-row {
+  margin-left: 10px; }
+  .mock-exam-container .mock-editor-form-row .question-detail-container .total-questions-count {
+    border: 1px solid red;
+    margin: auto;
+    margin-top: 10px;
+    margin-right: 20px;
+    padding: 10px;
+    top: 90px;
+    background-color: #c3fbfb; }
+  .mock-exam-container .mock-editor-form-row .question-detail-container .test-form-field {
+    width: 50px; }
+    .mock-exam-container .mock-editor-form-row .question-detail-container .test-form-field.test-code {
+      width: 200px; }
+    .mock-exam-container .mock-editor-form-row .question-detail-container .test-form-field.duration {
+      width: 60px; }
+  .mock-exam-container .mock-editor-form-row .question-detail-container .question-filter-row .question-filter-container {
+    border: 1px solid; }
+  .mock-exam-container .mock-editor-form-row .question-table-row .question-desc-col {
+    width: 95%; }
+  .mock-exam-container .mock-editor-form-row .justify-content-space-around {
+    justify-content: flex-end;
+    margin-right: 20px; }
+  .mock-exam-container .mock-editor-form-row .mock-editor-form {
+    flex-grow: 1; }
+    .mock-exam-container .mock-editor-form-row .mock-editor-form .state-time-level {
+      align-items: baseline; }
+    .mock-exam-container .mock-editor-form-row .mock-editor-form .test-detail-row {
+      margin-right: 20px;
+      margin-left: 10px;
+      justify-content: space-around; }
+    .mock-exam-container .mock-editor-form-row .mock-editor-form .instruction-row {
+      padding-right: 50px;
+      margin-bottom: 10px; }
+      .mock-exam-container .mock-editor-form-row .mock-editor-form .instruction-row .instruction-row-item a {
+        cursor: pointer;
+        color: red; }
+
+.mock-exam-add-question-container {
+  margin-left: 20px; }
+  .mock-exam-add-question-container .mock-exam-heading-row {
+    position: fixed;
+    width: 100%;
+    border: 1px solid green; }
+  .mock-exam-add-question-container .add-question-filter-row {
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 10px; }
+    .mock-exam-add-question-container .add-question-filter-row .filter-col {
+      margin-right: 10px;
+      padding: 10px 10px; }
+      .mock-exam-add-question-container .add-question-filter-row .filter-col .filter-label {
+        margin-right: 10px;
+        padding-top: 5px; }
+
+/*# sourceMappingURL=style.css.map */

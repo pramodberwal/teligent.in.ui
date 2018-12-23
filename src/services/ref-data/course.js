@@ -66,18 +66,13 @@ export let getAllPublicCourses=()=>{
 
 export let getCourseById = (id)=>{
  let promise = new Promise((resolve,reject)=>{
-  let course = _.find(COURSE_STORE,course => Number(course.id) === Number(id));
-  if(!course){
-   instance.get("/course/get/"+id).then(resp=>{
-    _.add(COURSE_STORE,resp.data);
-    resolve({course:resp.data});
-   }).catch(error =>{
-    console.log(error);
-    reject({message:'Error while fetching all courses!'});
-   });
-  }else{
-   resolve({course:course});
-  }
+  instance.get("/course/get/"+id).then(resp=>{ 
+   resolve({course:resp.data});
+  }).catch(error =>{
+   console.log(error);
+   reject({message:'Error while fetching all courses!'});
+  });
+  
  });             
  return promise;
 };

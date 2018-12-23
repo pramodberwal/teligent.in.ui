@@ -1,0 +1,11 @@
+.mock-paper-manager-container .heading-row {
+  margin-left: 30px; }
+.mock-paper-manager-container .mock-paper-manager-table .mobile-heading {
+  display: none; }
+@media only screen and (max-width: 767px) {
+  .mock-paper-manager-container .mock-paper-manager-table .desktop-heading {
+    display: none; }
+  .mock-paper-manager-container .mock-paper-manager-table .mobile-heading {
+    display: block; } }
+
+/*# sourceMappingURL=style.css.map */

@@ -11,7 +11,7 @@ class QuestionPanelContainer extends React.Component{
      render={()=>{
       return <QuestionPanelComponent
        currentQuestionIndex={0}
-       testSeriesId={this.props.testSeriesId}
+       testId={this.props.testId}
        {...this.props}
       />;
      }} /> 

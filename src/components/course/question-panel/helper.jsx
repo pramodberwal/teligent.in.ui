@@ -1,41 +1,41 @@
 
 import * as $ from 'jquery';
 import * as CookieService from 'jquery.cookie';
-import {getTestSeriseById} from '../../../services/test-series';
+import {getTestById} from '../../../services/exam-test';
 
-export let loadTestSeries = (props,component)=>{
- if(props.testSeriesId){
-  getTestSeriseById(props.testSeriesId).then(
+export let loadTest = (props,component)=>{
+ if(props.testId){
+  getTestById(props.testId).then(
    data =>{
-    if(data.testSeries && data.testSeries.questions && data.testSeries.questions.length > 0){
+    if(data.test && data.test.questions && data.test.questions.length > 0){
      let currentQuestionIndex = Number(props.currentQuestionIndex);
      let isPreviousDisabled = true;
      let isNextDisabled = true;
-     let attemptedQuestions = $.cookie(props.testSeriesId+'_attemptedQuestions');
+     let attemptedQuestions = $.cookie(props.testId+'_attemptedQuestions');
      if(attemptedQuestions){
       attemptedQuestions = JSON.parse(attemptedQuestions);
      }else{
       attemptedQuestions={};
      }
      
-     if(Number(currentQuestionIndex) < (data.testSeries.questions.length - 1) ){
+     if(Number(currentQuestionIndex) < (data.test.questions.length - 1) ){
       isNextDisabled = false;
      } 
-     // Reached Start of the series, disable previous
+     // Reached Start of the , disable previous
      if( currentQuestionIndex > 0){
       isPreviousDisabled = false;
      }
         
      component.setState({
-      testSeries:data.testSeries,
+      test:data.test,
       currentQuestionIndex:currentQuestionIndex,
       isNextDisabled:isNextDisabled,
       isPreviousDisabled:isPreviousDisabled,
       attemptedQuestions:attemptedQuestions,
-      activeQuestion:data.testSeries.questions[currentQuestionIndex],
+      activeQuestion:data.test.questions[currentQuestionIndex],
      });
     }else{
-     component.setSate({testSeries:data.testSeries});
+     component.setSate({test:data.test});
     }
    }
   ).catch(error =>{

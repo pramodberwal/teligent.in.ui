@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import * as _ from 'lodash';
 import {Value} from 'slate';
 import './style.css';
+import {COMPLEXITY_LEVELS} from '../../../constants/system-constant';
 import RichTextEditor from '../rich-text-editor/container';
 import {getAnswer, getQuestionById } from '../../../services/questions/question-service';
 
@@ -57,7 +58,13 @@ componentWillReceiveProps = (props ) =>{
       let questionForEditor = convertQuestionToEditor(data.question);
       questionForEditor.answer = answerData.answerKey.answer;
       questionForEditor.explanation = answerData.answerKey.explanation?Value.fromJSON(JSON.parse(answerData.answerKey.explanation)):
-       Value.fromJSON(defaultValue);     
+       Value.fromJSON(defaultValue);  
+      let level= _.find(COMPLEXITY_LEVELS, level => Number(level.id) === Number(questionForEditor.complexityLevel) );
+      if( level ) {
+       questionForEditor.complexityLevel=level.name;
+      }
+
+
       this.setState({question:questionForEditor});
      })
      .catch(error =>{
@@ -224,15 +231,17 @@ render(){
     </div>
 
 
-    <div className="form-row question-preview-detail-row">
+    {/*  <div className="form-row question-preview-detail-row">
      <div className="form-group question-preview-detail-col">
       <span className='question-preview-detail-label'>Tags:</span>
       <span className='question-preview-detail-value'>
        {questionsTags}</span>
      </div>
-    </div>
+    </div> */}
 
-   
+    <div className="row justify-content-end">
+     <div className="font-italic">{question.note?'('+question.note+')':''}</div> 
+    </div>
     <div className="form-row  mt-1">
      <div className="col-1">
       <button type="button" className="btn btn-primary" onClick={this.handleBack}>

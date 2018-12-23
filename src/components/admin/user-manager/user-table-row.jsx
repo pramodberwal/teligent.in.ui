@@ -34,7 +34,10 @@ export let UserTableHeader = (props)=>{
      <div className="col text-center ">City</div>
      <div className="col text-center">State</div>
     </div>
-   </th> 
+   </th>
+   <th scope="col"  className="desktop-heading">
+   
+   </th>  
   </tr>
  );   
 };

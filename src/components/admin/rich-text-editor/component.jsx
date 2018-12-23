@@ -153,7 +153,11 @@ let ImageSelectorComp = (props)=>{
 };
  
 export default class RichTextEditorComponent extends React.Component{
- /**
+
+componentWillUnmount = ()=>{
+}
+
+/**
    * Deserialize the initial editor value.
    *
    * @type {Object}

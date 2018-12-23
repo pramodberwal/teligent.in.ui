@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch,Route,withRouter} from 'react-router-dom';
 import ChapterHomeComponent from './component';
-import TestSeriesPanel from '../test-series-panel/container';
+import TestPanel from '../test-panel/container';
 
 class ChapterContainer extends React.Component{
  render(){
@@ -12,10 +12,10 @@ class ChapterContainer extends React.Component{
       {...this.props}      
      />;
     }}/>
-   <Route path={`${this.props.match.url}/testSeries/:seriesId`} 
+   <Route path={`${this.props.match.url}/examtestpaper/:testId`} 
     render={(props)=>{
-     return <TestSeriesPanel 
-      testSeriesId={props.match.params.seriesId}
+     return <TestPanel 
+      testId={props.match.params.testId}
       {...this.props} />;    
     }}/>   
   </Switch>);

@@ -1,5 +1,5 @@
 import { getSubjectById } from "../../../services/ref-data/subject";
-import { getTestSeriseBySubject } from "../../../services/test-series";
+import { getTestBySubject } from "../../../services/exam-test";
 import {getResources} from '../../../services/ref-data/resource';
 
 
@@ -21,11 +21,11 @@ export let loadData =(props,component)=>{
   .catch(error =>{
     
   });
- getTestSeriseBySubject(props.subjectId)
+ getTestBySubject(props.subjectId)
   .then(data =>{
-   component.setState({testSeriesList:data.testSeriesList});
+   component.setState({testList:data.testList});
   }).catch(data=>{
-   component.setState({testSeriesList:[]});
+   component.setState({testList:[]});
   });
 };
 
@@ -37,10 +37,10 @@ export let componentWillMountHelper =(component)=>{
    component.setState({subject:''});
   });
 
- getTestSeriseBySubject(component.props.subjectId)
+ getTestBySubject(component.props.subjectId)
   .then(data =>{
-   component.setState({testSeriesList:data.testSeriesList});
+   component.setState({testList:data.testList});
   }).catch(data=>{
-   component.setState({testSeriesList:[]});
+   component.setState({testList:[]});
   });
 };

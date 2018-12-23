@@ -14,7 +14,7 @@ export default class CourseHomeComponent extends React.Component{
    subject:'',
    chapter:'',
    course:'',
-   testSeriesList:[],
+   testList:[],
   }
 componentWillReceiveProps = (props)=>{
  let subject = ''; 
@@ -28,6 +28,7 @@ componentWillReceiveProps = (props)=>{
  
  this.setState({
   subject:subject,
+  message:'',
   resource:props.resource});
 
 }
@@ -37,10 +38,11 @@ componentWillReceiveProps = (props)=>{
     return ;
    }
    let props = this.props;
-   let course ='';
+   let course ='';   
    getCourseById(props.courseId)
     .then(courseData =>{ 
      course =  courseData.course;
+     
      let subject = ''; 
      let subjectId = props.subjectId;
      if(!subjectId 
@@ -52,6 +54,7 @@ componentWillReceiveProps = (props)=>{
      this.setState({
       course:course,
       subject:subject,
+      message:'',
       resource:props.resource});
      /* if(subject && !props.subjectId){      
       this.props.history.push(`${this.props.match.url}/subject/`+subject.id);

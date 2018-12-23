@@ -26,6 +26,8 @@
     "popper.js": "^1.14.3",
     "react": "^16.5.2",
     "react-chartjs-2": "^2.7.4",
+    "react-datepicker": "^2.0.0",
+    "react-datetime-bootstrap": "^1.4.5",
     "react-dom": "^16.5.2",
     "react-emotion": "^9.2.12",
     "react-mathjax": "^1.0.1",

@@ -2,10 +2,10 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {RESOURCE_DOWNLOAD_SERVICE_ENDPOINT} from '../../../constants/system-constant';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getTestSeriseBySubject } from "../../../services/test-series";
+import { getTestsBySubject } from "../../../services/exam-test";
 import { getChaptersBySubject } from "../../../services/ref-data/chapter";
 import { Value } from 'slate';
-import { SubjectTestSeriesTable } from './subject-test-series-table';
+import { SubjectTestTable } from './subject-test-table';
 import {getResources} from '../../../services/ref-data/resource';
 import RichTextEditor from '../../admin/rich-text-editor/container';
 import './style.css';
@@ -17,7 +17,7 @@ export default class SubjectHomeComponent extends React.Component{
      course:'',
      subject:'',
      chapterIndexOpen:false,
-     testSeriesList:[]
+     testList:[]
     };
     componentWillReceiveProps= (props)=>{ 
      if(!props.subject.id){
@@ -53,11 +53,11 @@ export default class SubjectHomeComponent extends React.Component{
      
      
 
-     getTestSeriseBySubject(props.subject.id)
+      getTestsBySubject(props.subject.id)
       .then(data =>{
-       this.setState({testSeriesList:data.testSeriesList});
+       this.setState({testList:data.testList});
       }).catch(data=>{
-       this.setState({testSeriesList:[]});
+       this.setState({testList:[]});
       });
     }
 
@@ -136,9 +136,9 @@ export default class SubjectHomeComponent extends React.Component{
           :'No summary'}
         </div>
        
-        <div className="subject-test-series-table">
-         <SubjectTestSeriesTable 
-          testSeriesList={this.state.testSeriesList}
+        <div className="subject-test--table">
+         <SubjectTestTable 
+          testList={this.state.testList}
           {...this.props}/>
         </div>
        </div>

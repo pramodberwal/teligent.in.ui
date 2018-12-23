@@ -24,6 +24,9 @@
   background-color: #6f5b5b;
   color: #f9f9f9;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); }
+.study-matrial-container .book-container .external-book-box {
+  width: 120px;
+  height: 240px; }
 .study-matrial-container .book-container .book-box {
   cursor: pointer; }
 .study-matrial-container .book-summary-container {
