@@ -41,7 +41,10 @@
     .nav-bar-container .right .justify-content-flex-end {
       justify-content: flex-end; }
     .nav-bar-container .right .my-account-login-container .my-account-col {
-      color: rgba(42, 103, 75, 0.85); }
+      color: rgba(42, 103, 75, 0.85);
+      padding-right: 2px;
+      border-right: 1px solid;
+      border-width: 2px; }
       .nav-bar-container .right .my-account-login-container .my-account-col a {
         font-size: 20px;
         color: inherit; }
