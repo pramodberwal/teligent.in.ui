@@ -14,11 +14,12 @@
         width: 100%;
         text-align: center;
         padding: 10px 0px;
-        background-color: #F76439;
+        background-color: $course-home-link-row ;   
         z-index: 153;
         .course-link{
             display: inline-block;
-            background-color: rgba(125, 25, 16, 0.52);
+            background-color: rgba(14, 134, 233, 0.52);
+            font-size: 20px;
             border-radius: 50px;
            // border: 1px solid red;
             padding: 20px 60px; 
@@ -31,7 +32,7 @@
             }
         }
         .course-link:hover{
-            background-color: rgba(98, 86, 85, 0.52);
+            background-color: rgba(58, 84, 88, 0.52);
           //  width: 190px;
            // height: 70px;
             box-sizing: border-box;
@@ -49,6 +50,7 @@
         }
         .course-home-links-row{ 
             position: fixed;  
+            background-color: $course-home-link-row ;   
             bottom: $footer-height-mobile;     
             .course-link{
                 display: block;
@@ -64,7 +66,8 @@
                 display: block;
                 margin-bottom: 120px;
             }
-            .course-home-links-row{               
+            .course-home-links-row{  
+                background-color: $course-home-link-row ;            
                 .course-link{
                     display: inline;
                     padding: 10px 30px;
@@ -80,6 +83,7 @@
         }
         .course-home-links-row{
             bottom: $footer-height-tablet;
+            background-color: $course-home-link-row ;   
             position: fixed;
             .course-link{
                // border: 1px solid red;

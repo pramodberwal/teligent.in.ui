@@ -15,6 +15,6 @@ export let CustomNavLink = (props)=>{
   className={props.className}
   activeClassName={props.activeClassName} 
   to={props.to}>
-  {props.name}
+  <span className="text-style"> {props.name}</span>
  </NavLink>;
 };

@@ -29,7 +29,7 @@ export let getAllUser = ()=>{
 };
 
 export let getCsrfToken = ()=>{
- http.get('/user/get')
+ http.get('/user/login')
   .then(tokenResp =>{
    csrfToken=tokenResp.data;
   })
@@ -38,9 +38,24 @@ export let getCsrfToken = ()=>{
   });
 };
 
+export let passwordResetRequest = (username)=>{
+ let promise = new Promise((resolve,reject)=>{
+   console.log('Request password reset for ',username);
+  http.get('/user/password/reset/request',JSON.stringify({username:username}))
+   .then(resp =>{
+    resolve({message:'Password reset request generated with request id ='+resp.data});
+   })
+   .catch(error =>{
+    reject({message:'Error while changeing password'});
+   });
+ });
+ return promise;
+};
+
 export let passwordChange  =(currentPassword, newPassword)=>{
  let promise = new Promise((resolve,reject)=>{
-  http.post('/user/password/change',{currentPassword:currentPassword,newPassword:newPassword},
+
+  http.post('/user/password/change',JSON.stringify({currentPassword:currentPassword,newPassword:newPassword}),
    {headers:{[csrfToken.headerName]:csrfToken.token}})
    .then(reps =>{
     resolve({message:'Password change successfully!'});

@@ -1,8 +1,9 @@
+@import '../../style-vars.scss';
 .app-body-container{ 
     .heading-row{
         justify-content: center;
         padding: 20px 0px;
-        background: #ffeeda;
+        background-color: $body-heading-row-backgraond-color;
         color: black;
         .heading-col{
             .heading-text{

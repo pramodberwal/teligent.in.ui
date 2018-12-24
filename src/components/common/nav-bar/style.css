@@ -1,14 +1,15 @@
 .nav-bar-container {
-  background-color: #F76439;
-  background-image: linear-gradient(54deg, #f55a29 -68%, #ff722e 102%);
+  background-color: white;
   flex-grow: 1; }
   .nav-bar-container.sticky {
     box-shadow: 0px 4px 7px 0 rgba(22, 21, 21, 0.91);
     transition: top 0.1s linear; }
   .nav-bar-container .middle {
-    flex-grow: 1; }
+    flex-grow: 1;
+    background-color: white; }
     .nav-bar-container .middle .nav-item {
-      padding: 11px; }
+      padding: 11px;
+      color: rgba(42, 103, 75, 0.85); }
       .nav-bar-container .middle .nav-item .dropdown-container {
         position: absolute;
         display: none;
@@ -23,8 +24,8 @@
       font-family: "Open Sans",sans-serif;
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
       text-transform: capitalize;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 20px;
+      color: rgba(42, 103, 75, 0.85);
       position: relative;
       padding: inherit;
       border-radius: 24px;
@@ -32,24 +33,32 @@
       letter-spacing: 0.3px;
       box-sizing: border-box; }
     .nav-bar-container .middle .active {
-      background-color: #c74e17;
+      background-color: #17c7c7;
+      color: rgba(42, 103, 75, 0.85);
       border-radius: 24px; }
   .nav-bar-container .right {
     margin-right: 0px; }
     .nav-bar-container .right .justify-content-flex-end {
       justify-content: flex-end; }
+    .nav-bar-container .right .my-account-login-container .my-account-col {
+      color: rgba(42, 103, 75, 0.85); }
+      .nav-bar-container .right .my-account-login-container .my-account-col a {
+        font-size: 20px;
+        color: inherit; }
     .nav-bar-container .right .my-account-login-container .login-btn {
       padding: 0px 10px;
       cursor: pointer; }
       .nav-bar-container .right .my-account-login-container .login-btn .login-link {
-        color: white;
+        color: rgba(42, 103, 75, 0.85);
+        font-size: 20px;
         text-decoration: none; }
     .nav-bar-container .right .my-account-login-container .logout-btn {
       margin-left: 5px;
       padding-left: 2px; }
       .nav-bar-container .right .my-account-login-container .logout-btn .logout-link {
         text-decoration: none;
-        color: white; }
+        color: rgba(42, 103, 75, 0.85);
+        font-size: 20px; }
   .nav-bar-container .mobile-menu-toggler {
     display: none; }
   .nav-bar-container .mobile-menu-top-container {

@@ -21,8 +21,8 @@ export default class CarouselComponent  extends React.Component{
        <img src="/static/images/carousel/slider-06.jpg" className="swapBlocks" />
       </Link>
       <div className="label_text">
-       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit eos nihil corrupti inventore id culpa repellat molestiae quam at molestias. 
-        <a href="#" className="btn btn-small btn-yellow">See more</a>
+       <p> 
+        <a href="#" className="btn btn-small btn-yellow"></a>
        </p></div>
       </li>
       <li>
@@ -30,8 +30,8 @@ export default class CarouselComponent  extends React.Component{
         <img src="/static/images/carousel/slider-07.jpg" className="swapBarsBack" />
        </Link>
        <div className="label_text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit eos nihil corrupti inventore id culpa repellat molestiae quam at molestias. 
-         <a href="#" className="btn btn-small btn-yellow">See more</a>
+        <p> 
+         <a href="#" className="btn btn-small btn-yellow"></a>
         </p>
        </div>
       </li>
@@ -40,8 +40,8 @@ export default class CarouselComponent  extends React.Component{
         <img src="/static/images/carousel/slider-08.jpg" className="swapBarsBack" />
        </Link>
        <div className="label_text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit eos nihil corrupti inventore id culpa repellat molestiae quam at molestias. 
-         <a href="#" className="btn btn-primary">See more
+        <p> 
+         <a href="#" className="btn btn-small btn-yellow">
          </a></p></div>
       </li>
      </ul>

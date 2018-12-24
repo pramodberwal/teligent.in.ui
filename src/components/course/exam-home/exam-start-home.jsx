@@ -2,6 +2,7 @@ import React from 'react';
 import * as _ from 'lodash';
 import * as $ from 'jquery';
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 import {Prompt} from 'react-router-dom';
 import TimerComponent from '../../helper/timer';
 import {getMockExamByIdPublic,startExamAttempt,finishExamAttempt} from '../../../services/mock-exam';
@@ -23,24 +24,39 @@ export default class ExamStartHome extends React.Component{
      examAttempt:{},
      testAttempts:{},
      questionPanelStates:{},
-     examStartHome:''
+     examStartHome:'',
+     isTimeout:false,
+     isExamExpired:false,
+
     }
     componentDidMount=()=>{
-     startExamAttempt(this.props.examId)
-      .then(attemptData =>{
-       getMockExamByIdPublic(attemptData.examAttempt.examId)
-        .then(examData =>{
+    
+     getMockExamByIdPublic(this.props.examId)
+      .then(examData =>{
+       let startTime = moment(examData.mockExam.startDateTime?examData.mockExam.startDateTime: new Date());
+       let durationLeft = moment.duration(moment(startTime).add(examData.mockExam.durationMinutes,'m').diff(moment()));
+       
+       console.log('durationLeft ',durationLeft);
+       if(durationLeft.hours() < 0 ||
+       durationLeft.minutes() < 0 ||
+       durationLeft.seconds() < 0){
+        this.onExamExpired();
+        return;
+       }
+
+       startExamAttempt(this.props.examId)
+        .then(attemptData =>{
          this.setState({isError:false,examStartHome:this.props.match.url, message:'',examFinished:false,examAttempt:attemptData.examAttempt,exam:examData.mockExam});
         })
         .catch(error =>{
-         console.error('Error while loading the exam ',error);
+         console.error('Error while starting the exam ',error);
          this.setState({isError:true, message:error.message});
         });
       })
       .catch(error =>{
-       console.error('Error while starting the exam ',error);
+       console.error('Error while loading the exam ',error);
        this.setState({isError:true, message:error.message});
-      });
+      });     
     }
 
     componentWillUnmount =()=>{
@@ -75,11 +91,23 @@ export default class ExamStartHome extends React.Component{
       });
     }
 
-    onExamFinish =()=>{   
-     let done = window.confirm('Are you sure to submit the exam?');    
-     if(!done ){
-      return;
-     }
+    onExamExpired = ()=>{
+     this.setState({isError:true, isExamExpired:true, message:'This exam has been expired!'});
+    }
+
+    onTimeout = ()=>{
+     this.onExamFinish(true);
+     this.setState({isError:true, isTimeout:true, message:'Your time is over!'});
+    }
+
+    onExamFinish =(timeout)=>{ 
+     if(!timeout){
+      let done = window.confirm('Are you sure to submit the exam?');    
+      if(!done ){
+       return;
+      }
+     }  
+     
      
      let examTestAttempts = [];
      _.forEach(this.state.exam.tests , t =>{
@@ -87,7 +115,7 @@ export default class ExamStartHome extends React.Component{
        let testAttempt = this.state.testAttempts[t.id];
        let attemptAnswers = testAttempt['attemptAnswers'];
        let attemptAnswersList = [];
-       let questionsList = Object.keys(attemptAnswers);
+       let questionsList = attemptAnswers?Object.keys(attemptAnswers):[];
        _.forEach(questionsList, questionId =>{
         attemptAnswersList.push({questionId:questionId,selectedAns:attemptAnswers[questionId]});
        });
@@ -122,6 +150,15 @@ export default class ExamStartHome extends React.Component{
     }
 
     render(){
+
+     if(this.state.isExamExpired || this.state.isTimeout){
+      return <div className="container">
+       <div className="row">
+        <div className="mx-auto"><span className="text-style">{this.state.message}</span></div>
+       </div>
+      </div>; 
+     }
+
      let tests = this.state.exam.tests;
      let subjectsHtml ='';     
      if(tests && Array.isArray(tests)){
@@ -168,6 +205,8 @@ export default class ExamStartHome extends React.Component{
        <div className="timer-col">       
         <TimerComponent
          startTime={this.state.exam.startDateTime}
+         onExamExpired={this.onExamExpired}
+         onExamTimeout = {this.onTimeout}
          hour={0}
          minutes={this.state.exam.durationMinutes ?this.state.exam.durationMinutes:0}
          seconds={0}

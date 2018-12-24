@@ -9,7 +9,8 @@ import ContactUs from '../contactus/container';
 import Blog from '../../blog/container';
 import  Strategy from '../../strategy/container';
 import StudyMatrial from '../../course/study-matrial/container';
-import Logout from '../logout/container';
+import Logout from '../../common/logout/container';
+import UserHomeHome from '../../user-home/home/container';
 import SecureComponent from '../../common/secure/component';
 
 class HomeContainer extends React.Component{
@@ -28,26 +29,33 @@ class HomeContainer extends React.Component{
      return <Blog {...this.props}/>;
     }} />
     <Route path="/contact-us" render={(props)=>{
-     return <ContactUs />;
+     return <ContactUs {...this.props}/>;
     }} />
     <Route path="/e-library" 
      render={()=>{
-      return <StudyMatrial />;
+      return <StudyMatrial {...this.props}/>;
      }}/>
     <Route path="/login" render={(props)=>{
-     return <LoginHome />;
+     return <LoginHome {...this.props}/>;
     }} />   
     <Route path="/logout" render={(props)=>{
-     return <Logout />;
+     return <Logout {...this.props}/>;
     }} />
-    <SecureComponent path={`/course/:courseId`} component={(props)=>
-    {   return (<CourseHome 
-     courseId={props.match.params.courseId}        
-     {...props} />);
-     
-    }
-    } />
-
+    <Route path={`/course/:courseId`}  render={(props)=>{
+     return <SecureComponent component={(props)=>
+     {   return (<CourseHome 
+      courseId={props.match.params.courseId}        
+      {...this.props} />);       
+     }
+     } />;
+    }} />
+    <Route path={`/my-profile`}  render={(props)=>{
+     return <SecureComponent component={(props)=>
+     {   return (<UserHomeHome      
+      {...this.props} />);       
+     }
+     } />;
+    }} />
     <Route render={(props)=>{
      return "Coming soon!!!";
     }} />

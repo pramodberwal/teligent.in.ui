@@ -1,7 +1,7 @@
 .app-body-container .heading-row {
   justify-content: center;
   padding: 20px 0px;
-  background: #ffeeda;
+  background-color: white;
   color: black; }
   .app-body-container .heading-row .heading-col .heading-text {
     color: inherit;

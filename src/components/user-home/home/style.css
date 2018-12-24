@@ -1,3 +1,5 @@
-
+.user-home-container .user-home-body {
+  flex-grow: 1;
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

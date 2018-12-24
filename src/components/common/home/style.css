@@ -8,11 +8,12 @@
     width: 100%;
     text-align: center;
     padding: 10px 0px;
-    background-color: #F76439;
+    background-color: rgba(236, 236, 236, 0.85);
     z-index: 153; }
     .user-home-container .course-home-links-row .course-link {
       display: inline-block;
-      background-color: rgba(125, 25, 16, 0.52);
+      background-color: rgba(14, 134, 233, 0.52);
+      font-size: 20px;
       border-radius: 50px;
       padding: 20px 60px;
       margin-left: 50px;
@@ -22,7 +23,7 @@
         font-family: "Open Sans",sans-serif;
         letter-spacing: 0.3px; }
     .user-home-container .course-home-links-row .course-link:hover {
-      background-color: rgba(98, 86, 85, 0.52);
+      background-color: rgba(58, 84, 88, 0.52);
       box-sizing: border-box;
       box-shadow: 0px 4px 7px 0 rgba(22, 21, 21, 0.91); }
   @media screen and (max-width: 767px) {
@@ -31,6 +32,7 @@
       margin-bottom: 300px; }
     .user-home-container .course-home-links-row {
       position: fixed;
+      background-color: rgba(236, 236, 236, 0.85);
       bottom: 50px; }
       .user-home-container .course-home-links-row .course-link {
         display: block;
@@ -43,10 +45,12 @@
   .user-home-container .body-content {
     display: block;
     margin-bottom: 120px; }
-  .user-home-container .course-home-links-row .course-link {
-    display: inline;
-    padding: 10px 30px;
-    margin-left: 5px; } }
+  .user-home-container .course-home-links-row {
+    background-color: rgba(236, 236, 236, 0.85); }
+    .user-home-container .course-home-links-row .course-link {
+      display: inline;
+      padding: 10px 30px;
+      margin-left: 5px; } }
 
   @media screen and (min-width: 767px) and (max-width: 1000px) {
     .user-home-container .body-content {
@@ -54,6 +58,7 @@
       margin-bottom: 110px; }
     .user-home-container .course-home-links-row {
       bottom: 30px;
+      background-color: rgba(236, 236, 236, 0.85);
       position: fixed; }
       .user-home-container .course-home-links-row .course-link {
         display: inline;
