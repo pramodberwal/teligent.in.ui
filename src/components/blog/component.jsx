@@ -44,12 +44,12 @@ export default class BlogComponent extends React.Component{
 
      return <div className="container-fluid blog-container">  
       <div className="row">
-       <div className="blog-navigation-container">
+       <div className="blog-navigation-container col-md-3 col-lg-3">
         <ol>
          {blogListHtml}
         </ol>
        </div>
-       <div className="flex-grow-1 blog-detail-container">
+       <div className="flex-grow-1 blog-detail-container col-md-9 col-lg-9">
         <div className="blog-summary-header">{this.state.blog.summary}</div>
         <div className="blog-Description">
          {this.state.blog?<RichTextEditor readOnly={true}
