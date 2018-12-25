@@ -1,14 +1,14 @@
-.strategy-container .strategy-navigation-container {
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
-  margin-top: 2rem;
-  padding: 20px; }
-  .strategy-container .strategy-navigation-container .active {
-    background-color: #0c0b0b;
-    color: white;
-    padding: 5px 5px; }
-.strategy-container .strategy-detail-container {
-  border-left: 1px solid black;
-  margin-left: 10px; }
+.strategy-container {
+  margin-top: 40px; }
+  .strategy-container .strategy-navigation-container {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+    border-top: 1px solid #e0e0e0;
+    padding-top: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px; }
+    .strategy-container .strategy-navigation-container .active {
+      color: #7e2d40;
+      text-decoration: underline; }
   .strategy-container .strategy-detail-container .strategy-summary-header {
     text-align: center;
     background-color: #8b6666;
@@ -17,6 +17,8 @@
     padding: 5px 0px; }
   .strategy-container .strategy-detail-container .strategy-Description {
     background-color: #f3fff3;
-    font-family: 'Courier New', Courier, monospace; }
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #ccc;
+    padding: 10px; }
 
 /*# sourceMappingURL=style.css.map */

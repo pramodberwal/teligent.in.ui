@@ -44,12 +44,12 @@ export default class StrategyComponent extends React.Component{
 
      return <div className="container-fluid strategy-container">  
       <div className="row">
-       <div className="strategy-navigation-container">
+       <div className="strategy-navigation-container col-md-3 col-lg-3">
         <ol>
          {strategyListHtml}
         </ol>
        </div>
-       <div className="flex-grow-1 strategy-detail-container">
+       <div className="flex-grow-1 strategy-detail-container col-md-9 col-lg-9">
         <div className="strategy-summary-header">{this.state.strategy.summary}</div>
         <div className="strategy-Description">
          {this.state.strategy?<RichTextEditor readOnly={true}
